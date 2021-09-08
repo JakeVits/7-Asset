@@ -1,2 +1,2 @@
-# 7-Asset
+# 7-Assets
 Asset management for sale
