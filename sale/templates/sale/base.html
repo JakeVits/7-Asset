@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block dashboard_title %}{% endblock %}
+    {% block inventory_title %}{% endblock %}
+    {% block settings_title %}{% endblock %}
+    {% block search_stock_title %}{% endblock %}
+    {% block admission_title %}{% endblock %}
+    {% block academic_record_title %}{% endblock %}
+</head>
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/base.css'%}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <div class="top-nav">
+                        <span class="icon"><i id="logo" class='bx bxs-bug'></i></span>
+                        <span class="title"><h2 class="app-name">7-Assets</h2></span>
+                    </div>
+                </li>
+                <li>
+                    <a href="{% url 'sale:dashboard' %}">
+                        <span class="icon"><i class="fa fa-dashboard" style="font-size:18px"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><i class="fa fa-user" style="font-size:19px"></i></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sale:new_asset' %}">
+                        <span class="icon"><i class="fa fa-plus-circle" style="font-size: 20px;" aria-hidden="true"></i></span>
+                        <span class="title">Add Asset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sale:search' %}">
+                        <span class="icon"><i class="fa fa-search" style="font-size: 18px;" aria-hidden="true"></i></span>
+                        <span class="title">Search Asset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sale:inventory' %}">
+                        <span class="icon"><i class="fa fa-cubes" style="font-size: 18px;" aria-hidden="true"></i></span>
+                        <span class="title">Inventory</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="icon"><i class="fa fa-bell" style="font-size:17px"></i></span>
+                        <span class="title">Notification</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sale:settings' %}">
+                        <span class="icon"><i class="fa fa-cogs" style="font-size:18px"></i></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-shield" style="font-size:18px"></i></span>
+                        <span class="title">Privacy & Policy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon"><i class="fa fa-sign-out" style="font-size:18px"></i></span>
+                        <span class="title">Log-Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle" onclick="toggleMenu();"></div>
+                <div class="right-top">
+                    <div class="user-image">
+                        <img src="{{request.user.account.profile.url}}">
+                    </div>
+                    <h3 id="user-login">Logged-In as {{ user.get_username }}</h3>
+                </div>
+            </div>
+            {% if messages %}
+                {% for m in messages %}
+                    {% if m.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                        <div class="wrapper">
+                            <div class="toast-failure">
+                                <i id="failure" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                <div class="message">
+                                    <p class="result">Warning!</p>
+                                    <p class="failure-message">{{m}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% block dashboard %}{% endblock %}
+            {% block password_change_form %}{% endblock %}
+            {% block stock %}{% endblock %}
+            {% block settings %}{% endblock %}
+            {% block search_stock %}{% endblock %}
+            {% block inventory %}{% endblock %}
+            <button id="top-btn" onclick="scrollBtn()"><i class="fa fa-angle-double-up"></i></button>
+            <div id="copyright_bar">
+                <div id="bar">
+                    <p id="copyright">Copyright © 2021 7-Assets.com. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'sale/js/base.js' %}"></script>
+</body>
+</html>

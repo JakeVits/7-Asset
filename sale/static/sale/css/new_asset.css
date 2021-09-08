@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('/static/sale/image/login.jpg');
+    background-size: cover;
+    position: relative;
+}
+/********************** home link design *******************************/
+#arrow{
+    margin-left: 3%;
+    position: absolute;
+}
+#home-link{
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-family: 'Secular One', sans-serif;
+}
+#arrow i{
+    color: yellow;
+    animation: 0.7s rotate infinite linear;
+}
+@keyframes rotate{
+    to{
+        transform: translate(-90%, 0%);
+    }
+}
+/********************** form design *******************************/
+.center{
+    margin-top: 5%;
+    position: relative;
+    left: 24%;
+    width: 800px;
+    background: #fefefe;
+    border-radius: 10px;
+}
+.center .asset h1{
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 10px 0 20px 0;
+    font-family: 'Secular One', sans-serif;
+}
+.center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+    width: 100%;
+    padding-bottom: 30px;
+    position: relative;
+    margin-bottom: 5%;
+}
+form .txt_field{
+    position: relative;
+    margin: 20px 0;
+}
+.txt_field input{
+    width: 50%;
+    padding: 0 5px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 20px;
+    outline: none;
+    padding-left: 18px;
+    letter-spacing: 1px;
+}
+.txt_field select{
+    width: 54%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+select, input:focus{
+    outline: none;
+}
+#address{
+    width: 96%;
+    margin-top: -8%;
+}
+#phone{
+    width: 96%;
+}
+textarea{
+    width: 97%;
+    padding-bottom: 60px;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 15px;
+    padding-top: 15px;
+    font-size: 14px;
+}
+textarea::placeholder{
+    padding-top: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+textarea:focus{
+    outline: none;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 40px;
+    border: 1px solid;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 2px;
+    margin-top: 3%;
+}
+input[type="submit"]:hover{
+    background-color: #0000b3;
+    transition: .3s;
+}
+.message{
+    color: red;
+    font-size: 13px;
+    position: absolute;
+    left: 34%;
+    padding-top: 1%;
+    margin-left: -1.7%;
+}
+.error-message{
+    color: red;
+    text-align: center;
+}
+/****************** Drag & Drop ******************/
+.drag-area{
+    border: 2px dashed #000;
+    height: 155px;
+    width: 300px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 12px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/sale/image/default_box.jpg');
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin-top: -22.2%;
+    margin-right: 5.2%;
+    letter-spacing: 1px;
+}
+.drag-area:hover{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/static/sale/image/default_box.jpg');
+    background-size: cover;
+}
+.drag-area .icon{
+    font-size: 45px;
+    color: #2691d9;;
+}
+.drag-area header{
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+}
+.drag-area span{
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin: 10px 0 15px 0;
+}
+.drag-area.active{
+    border: 2px solid #000;
+    opacity: 0.5;
+}
+.drag-area img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+#click-here{
+    margin-top: -2%;
+}
+#remove-btn{
+    margin-top: -1%;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    background: crimson;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    float: right;
+    display: none;
+    margin-bottom: 5%;
+    margin-right: 1px;
+}
+.remove-field{
+    padding-bottom: 1px;
+}
+#remove-btn:hover{
+    background: red;
+}
+#id_image{
+    display: none;
+}
+/****************** Toast Design ******************/
+.wrapper{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+    position: absolute;
+    transform: translate(-50%, -120%);
+    left: 90%;
+    cursor: pointer;
+}
+.toast-success{
+    width: 95%;
+    height: 50px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 15px 4px rgba(0,0,0,0.08);
+    border-left: 8px solid #60db93;
+}
+.toast-failure{
+    width: 95%;
+    height: 50px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 15px 4px rgba(0,0,0,0.08);
+    border-left: 8px solid red;
+}
+.message p{
+    font-size: 14px;
+    padding-top: 4px;
+    padding-left: 10px;
+    transform: translate(-10%, -243%);
+    color: #000;
+}
+.result{
+    font-size: 14px;
+    font-weight: 600;
+}
+.success-message{
+    margin-top: -12%;
+    font-size: 12px;
+}
+.update-failure-message{
+   margin-top: -11%;
+   font-size: 10px;
+}
+.failure-message{
+    margin-top: -13%;
+    font-size: 10px;
+}
+#success{
+    color: #26eb47;
+    font-size: 35px;
+    padding-top: 9px;
+    padding-left: 15px;
+}
+#failure{
+    color: crimson;
+    font-size: 30px;
+    padding-top: 9px;
+    padding-left: 15px;
+}

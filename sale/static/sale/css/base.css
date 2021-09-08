@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+html{
+    scroll-behavior: smooth;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: visible;
+    font-family: 'Poppins', sans-serif;
+}
+.container{
+    position: relative;
+    width: 100%;
+}
+/*********************** sidebar navigation ***************************/
+.navigation{
+    position: fixed;
+    width: 270px;
+    height: 100%;
+    background: #000;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.navigation.active{
+    width: 60px;
+}
+.navigation ul{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.navigation ul li{
+    position: relative;
+    width: 100%;
+    list-style: none;
+    letter-spacing: 5px;
+    padding-left: 3px;
+}
+.navigation ul li:hover{
+    background: #D2691E;
+}
+.navigation ul li:nth-child(1){
+    margin-bottom: 20px;
+}
+.navigation ul li:nth-child(1):hover{
+    background: transparent;
+}
+.navigation ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+.navigation ul li .top-nav{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+}
+.top-nav span{
+    font-size: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 4px;
+}
+.app-name{
+    padding-top: 7%;
+    margin-left: -7%;
+}
+#logo{
+    padding-left: 16%;
+}
+.navigation ul li .top-nav .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    padding-top: 9px;
+    font-size: 30px;
+}
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 53px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.navigation ul li a .icon .fa{
+    color: #fff;
+    font-size: 24px;
+}
+.navigation ul li .top-nav .icon .fa{
+    color: #fff;
+    font-size: 24px;
+}
+.navigation ul li a .title{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+.navigation ul li .top-nav .title{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 10px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+.title{
+    letter-spacing: 0.9px;
+}
+/*********************** main body ***************************/
+.main{
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: #f5f5f5;
+    transition: 0.5s;
+}
+.main.active{
+    width: calc(100% - 60px);
+    left: 60px;
+}
+/*********************** top-bar ***************************/
+.main .topbar{
+    width: 100%;
+    background: #fff;
+    height: 60px;
+    padding: 45px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.toggle{
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+.toggle::before{
+    content: '\f0c9';
+    font-family: fontAwesome;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 24px;
+    text-align: center;
+    color: #111;
+}
+/*********************** user-image area ***************************/
+.user-image{
+    position: relative;
+    min-width: 50px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 30%;
+}
+.user-image img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    text-align: center;
+}
+#user-login{
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: 'Ubuntu', sans-serif;
+    padding-top: 8px;
+}
+/****************** Toast Design ******************/
+.wrapper{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+    position: absolute;
+    transform: translate(-65%, -135%);
+    left: 50%;
+    cursor: pointer;
+}
+.toast-failure{
+    width: 95%;
+    height: 50px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 15px 4px rgba(0,0,0,0.08);
+    border-left: 8px solid red;
+}
+.message p{
+    font-size: 14px;
+    padding-top: 4px;
+    padding-left: 10px;
+    transform: translate(25%, -160%);
+    color: #000;
+}
+.result{
+    font-size: 14px;
+    font-weight: 600;
+}
+.failure-message{
+    margin-top: -3%;
+    font-size: 10px;
+}
+#failure{
+    color: crimson;
+    font-size: 30px;
+    padding-top: 9px;
+    padding-left: 15px;
+}
+/*********************** bottom area ***************************/
+#top-btn{
+    position: fixed;
+    width: 50px;
+    height: 55px;
+    background: #000;
+    bottom: 40px;
+    right: 10px;
+    border: none;
+    outline: none;
+    margin-left:20%;
+    z-index: 1;
+    font-size: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+}
+#top-btn i{
+    color: white;
+    padding: 20% 27%;
+}
+#copyright_bar{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    padding-top: 3px;
+    display: grid;
+    grid-gap: 20px;
+}
+#bar{
+    position: relative;
+    min-height: 35px;
+    background: #fff;
+    padding: 20px;
+}
+#copyright{
+    color: #555;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+}

@@ -1,0 +1,29 @@
+{% extends "sale/auth_base.html" %}
+{% block login_title %}<title>Login</title>{% endblock %}
+{% block login %}
+{% load socialaccount %}
+    <div class="center">
+        <div class="login">
+            <h1>Login</h1>
+            <form method="post" action="{% url 'sale:login' %}">
+                {% csrf_token %}
+                <div class="txt_field">
+                    <input name="username" type="text" required>
+                    <span></span>
+                    <label>Username</label>
+                </div>
+                <div class="txt_field">
+                    <input name="password" type="password" required>
+                    <span></span>
+                    <label>Password</label>
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div class="link">
+            <a class="login-link" href="{% url 'sale:registration' %}">No Account Yet?</a><br>
+            <a class="login-link" href="{% provider_login_url 'google' %}">Login With Google</a><br>
+            <a class="login-link" href="{% provider_login_url 'facebook' %}">Login With Facebook</a>
+        </div>
+    </div>
+{% endblock %}

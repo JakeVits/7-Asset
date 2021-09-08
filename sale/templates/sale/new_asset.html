@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Asset</title>
+</head>
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/new_asset.css'%}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+{% if messages %}
+    {% for m in messages %}
+        {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="wrapper">
+                <div class="toast-success">
+                    <i id="success" class="fa fa-check-circle" aria-hidden="true"></i>
+                    <div class="message">
+                        <p class="result">Success!</p>
+                        <p class="success-message">{{m}}</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="wrapper">
+                <div class="toast-failure">
+                    <i id="failure" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <div class="message">
+                        <p class="result">Failure!</p>
+                        <p class="failure-message">{{m}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<div id="arrow">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    <a id="home-link" href="{% url 'sale:dashboard' %}">Dashboard</a>
+</div>
+<div class="center">
+    <div class="asset">
+        <h1>7-Asset</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="txt_field">
+                <select name="owner" hidden>
+                    <option value="{{user.id}}">{{user.username}}</option>
+                </select>
+                <select name="category" required>
+                    <option value="" selected>--- Category ---</option>
+                    <option value="Home-Appliances">Home-Appliances</option>
+                    <option value="Digital-Devices">Digital-Devices</option>
+                    <option value="Books">Books</option>
+                    <option value="Rides">Rides</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="txt_field">
+                <input name="name" type="text" placeholder="Asset" required>
+            </div>
+            <div class="txt_field">
+                <input name="price" type="number" placeholder="Price" max="99999999" required>
+            </div>
+            <div class="drag-area" id="drag-area">
+                <div class="icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
+                <header>Drag & Drop</header>
+                <span>OR</span>
+                <header id="click-here">Click here to upload image file</header>
+            </div>
+            <input name="image" id="id_image" type="file" accept=".jpg, .jpeg, .png">
+            <div class="remove-field">
+                <button id="remove-btn">Remove</button>
+            </div>
+            <div class="txt_field">
+                <input id="address" name="address" type="text" placeholder="Address" required>
+            </div>
+            <div class="txt_field">
+                <input id="phone" name="phone_number" type="tel" placeholder="Contact-Number" required>
+            </div>
+            <textarea name="description" placeholder="Description & Contact Info" required></textarea>
+            <input type="submit" value="Add Asset">
+        </form>
+    </div>
+</div>
+<script>window.USER_FOLLOW_URL = "{% url 'sale:new_asset' %}";</script>
+<script src="{% static 'sale/js/new_asset.js' %}"></script>
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+
+/****************** Toast Design ******************/
+.wrapper{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+    position: absolute;
+    transform: translate(-65%, -135%);
+    left: 50%;
+    cursor: pointer;
+}
+.toast-failure{
+    width: 95%;
+    height: 50px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 15px 4px rgba(0,0,0,0.08);
+    border-left: 8px solid red;
+}
+.message p{
+    font-size: 14px;
+    padding-top: 4px;
+    padding-left: 10px;
+    transform: translate(25%, -160%);
+    color: #000;
+}
+.result{
+    font-size: 14px;
+    font-weight: 600;
+}
+.failure-message{
+    margin-top: -3%;
+    font-size: 10px;
+}
+#failure{
+    color: crimson;
+    font-size: 30px;
+    padding-top: 9px;
+    padding-left: 15px;
+}

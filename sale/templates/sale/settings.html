@@ -1,0 +1,88 @@
+{% extends "sale/base.html" %}
+{% block settings_title %}<title>Settings</title>{% endblock %}
+{% block settings %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/settings.css'%}"/>
+    {% if messages %}
+        {% for m in messages %}
+            {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <strong class="message" id="success" style="color: green;">{{m}}</strong>
+            {% else %}
+                <strong class="message" id="fail" style="color: red;">{{m}}</strong><br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="center">
+        <div class="password-form">
+            <h1>Change Password</h1>
+            <form method="post" action="{% url 'sale:password' %}">
+                {% csrf_token %}
+                <div class="txt_field">
+                    <input name="old_password" type="password" required>
+                    <span></span>
+                    <label>Old Password</label>
+                </div>
+                <div class="txt_field">
+                    <input name="new_password1" type="password" required>
+                    <span></span>
+                    <label>New-Password</label>
+                </div>
+                <div class="txt_field">
+                    <input name="new_password2" type="password" required>
+                    <span></span>
+                    <label>Confirm-Password</label>
+                </div>
+                <input type="submit" value="Update">
+                <div class="update">
+                    <span class="email-update">Update Email?</span>
+                    <span class="username-update">Update Username?</span>
+                </div>
+            </form>
+        </div>
+        <div class="email-form">
+            <h1>Change Email</h1>
+            <form method="post" action="{% url 'sale:email' %}">
+                {% csrf_token %}
+                <div class="txt_field">
+                    <input name="new_email" type="email" required>
+                    <span></span>
+                    <label>New-Email</label>
+                </div>
+                <div class="txt_field">
+                    <input name="password" type="password" required>
+                    <span></span>
+                    <label>Password</label>
+                </div>
+                <input type="submit" value="Update">
+                <div class="update">
+                    <span class="password-update">Update Password?</span>
+                    <span class="username-update">Update Username?</span>
+                </div>
+            </form>
+        </div>
+        <div class="username-form">
+            <h1>Change Username</h1>
+            <form method="post" action="{% url 'sale:username' %}">
+                {% csrf_token %}
+                <div class="txt_field">
+                    <input name="new_username" type="text" required>
+                    <span></span>
+                    <label>New-Username</label>
+                </div>
+                <div class="txt_field">
+                    <input name="password" type="password" required>
+                    <span></span>
+                    <label>Password</label>
+                </div>
+                <input type="submit" value="Update">
+                <div class="update">
+                    <span class="password-update">Update Password?</span>
+                    <span class="email-update">Update Email?</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>window.USER_FOLLOW_URL = "{% url 'sale:settings' %}";</script>
+    <script src="{% static 'sale/js/settings.js'%}"></script>
+{% endblock %}

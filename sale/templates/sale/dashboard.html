@@ -1,0 +1,8 @@
+{% extends "sale/base.html" %}
+{% block dashboard_title%}<title>Dashboard</title>{% endblock %}
+{% block dashboard %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/dashboard.css'%}"/>
+
+<script src="{% static 'sale/js/dashboard.js' %}"></script>
+{% endblock %}
