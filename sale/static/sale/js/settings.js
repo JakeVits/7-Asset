@@ -30,22 +30,22 @@ username_update.forEach(e => {
         username_form.classList.add('show')
     })
 })
-
 // function to refresh particular elements in web browser
 function fetch_data(){
-     var url = window.USER_FOLLOW_URL;
+     var url = window.settings_url;
      $.ajax({
           url: url,
           type: 'get',
           success: function(data){
-               $("#success").load(url + " #success"); //must provide one space
-               $("#fail").load(url + " #fail");
+               $("#success-message").load(url + " #success-message"); //must provide one space
+               $("#red-message").load(url + " #red-message");
+               $("#failure-message").load(url + " #failure-message");
           },
           complete:function(data){
-               setTimeout(fetch_data,3000);
+               setTimeout(fetch_data, 3000);
           }
      });
 }
 $(document).ready(function(){
-    setTimeout(fetch_data,4000);
+    setTimeout(fetch_data, 3000);
 });

@@ -1,0 +1,32 @@
+{% extends "sale/base.html" %}
+{% block notification_title%}<title>Notification</title>{% endblock %}
+{% block notification %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/notification.css'%}"/>
+<div class="main-noty-bar">
+    {% if all_noty %}
+        {% for noty in all_noty %}
+            <div class="notification-bar">
+                <div class="noty-bar">
+                    <div class="noty-title">
+                        <div class="user">
+                            <h3>User</h3>
+                            <p>{{noty.interested_user}}</p>
+                        </div>
+                        <div class="date">
+                            <h3>Date</h3>
+                            <p>{{noty.date}}</p>
+                        </div>
+                        <div class="interested-asset">
+                            <h3>Interested-Asset</h3>
+                            <p>{{noty.asset_name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="bottom"></div>
+<!--<script src="{% static 'sale/js/dashboard.js' %}"></script>-->
+{% endblock %}

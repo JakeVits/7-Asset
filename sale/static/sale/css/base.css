@@ -165,6 +165,9 @@ body{
     color: #111;
 }
 /*********************** user-image area ***************************/
+.top-right{
+    margin-right: 20px;
+}
 .user-image{
     position: relative;
     min-width: 50px;
@@ -173,7 +176,7 @@ body{
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    margin-left: 30%;
+    margin-left: 25%;
 }
 .user-image img{
     position: absolute;
@@ -189,6 +192,58 @@ body{
     letter-spacing: 1px;
     font-family: 'Ubuntu', sans-serif;
     padding-top: 8px;
+}
+.pp-menu{
+    position: absolute;
+    top: 97px;
+    width: 150px;
+    background: #fff0f5;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    transition: 0.5s;
+    border-style: solid;
+    border-width: thin;
+    border-color: #ffb499;
+    display: none;
+}
+.open-pp-menu{
+    display: block;
+}
+.close-pp-menu{
+    display: none;
+}
+.pp-menu:before{
+    content: '';
+    position: absolute;
+    top: -11px;
+    right: 86px;
+    width: 20px;
+    height: 20px;
+    background: #fff0f5;
+    transform: rotate(45deg);
+    border-top: 0.1px solid #ffb499;
+    border-left: 0.1px solid #ffb499;
+}
+.pp-menu-inner{
+    padding: 8px 14px;
+}
+.pp-menu h4{
+    text-align: center;
+    font-size: 15px;
+}
+.pp-menu i{
+    font-size: 20px;
+    color: #000;
+}
+.pp-menu-title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding-left: 12.5px;
+    letter-spacing: 1px;
+}
+i:hover{
+    color: orangered;
 }
 /****************** Toast Design ******************/
 .wrapper{
@@ -250,7 +305,7 @@ body{
     color: white;
     padding: 20% 27%;
 }
-#copyright_bar{
+#copyright-bar{
     position: relative;
     width: 100%;
     padding: 20px;

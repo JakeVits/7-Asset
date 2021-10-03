@@ -92,7 +92,7 @@ DATABASES = {
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
-        'PORT': config('5432'),
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -133,10 +133,10 @@ LOGOUT_REDIRECT_URL = reverse_lazy('sale:login')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'sale/static/sale/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'sale/static/sale/image/')
 
 # social login backend
-SITE_ID = 8
+SITE_ID = 10
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',

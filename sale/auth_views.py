@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
 from .forms import RegistrationForm
-from .models import Account, User
+from .models import Profile, User
 
 
 # to handle user registration
@@ -16,15 +16,13 @@ class Registration(generic.CreateView):
     ''' if inputs are validated '''
     def form_valid(self, form):
         valid = super(Registration, self).form_valid(form)
-        user = User.objects.get(username=form.cleaned_data['username'])
-        ''' create new user object '''
-        username = Account(username=user)
-        username.save()
         ''' authenticate and login the new user '''
         user = authenticate(self.request, username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
         if user is not None:
             login(self.request, user)
-            self.request.session.set_expiry(3600)
+            user = self.request.user
+            Profile(user_id=User.objects.get(id=user.id)).save()  # create new instance in Profile Table
+            self.request.session.set_expiry(7200)
             return valid
         else:
             messages.warning(self.request, 'Invalid Authentication!')
@@ -39,8 +37,12 @@ def logInUser(request):
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
+                ''' to restrict admin from accessing the platform '''
+                if User.objects.get(username=request.POST.get('username')).is_superuser:
+                    messages.warning(request, 'Admin account is not permitted to access!')
+                    return redirect('sale:login')
                 login(request, user)
-                request.session.set_expiry(3600)
+                request.session.set_expiry(7200)
                 return redirect('sale:dashboard')
             return redirect('login')
         else:
@@ -56,7 +58,7 @@ def changePassword(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, 'Password is Successfully Changed!')
+            messages.success(request, 'Password is Updated!')
             return redirect('sale:settings')
         else:
             error_message = [error for error in form.errors]
@@ -74,19 +76,19 @@ def changeUsername(request):
         new_username = request.POST.get('new_username')
         password = request.POST.get('password')
         # authenticate the current user with the input password
-        user = authenticate(request, username=request.user, password=password)
+        user = authenticate(request, username=str(request.user), password=password)
         if user is not None:
-            # check if new username is in used
+            # to check if new username is in used
             if User.objects.filter(username=new_username):
                 messages.info(request, 'This Username is in Used!')
                 return redirect('sale:settings')
             current_user = User.objects.get(username=request.user)
             current_user.username = new_username
             current_user.save()
-            messages.success(request, 'Username is Successfully Changed!')
+            messages.success(request, 'Username is Updated!')
             return redirect('sale:settings')
         else:
-            messages.warning(request, 'Password is Incorrect!')
+            messages.info(request, 'Password is Incorrect!')
             return redirect('sale:settings')
     return redirect('sale:settings')
 
@@ -97,17 +99,17 @@ def changeEmail(request):
         new_email = request.POST.get('new_email')
         password = request.POST.get('password')
         # authenticate the current user with the input password
-        user = authenticate(request, username=request.user, password=password)
+        user = authenticate(request, username=str(request.user), password=password)
         if user is not None:
             if User.objects.filter(email=new_email):
                 messages.info(request, 'This Email is in Used!')
-                return redirect('accounts/password_change/')
+                return redirect('sale:settings')
             current_user = User.objects.get(username=request.user)
             current_user.email = new_email
             current_user.save()
-            messages.success(request, 'Email is Successfully Changed!')
+            messages.success(request, 'Email is Updated!')
             return redirect('sale:settings')
         else:
-            messages.warning(request, '* Password you entered was not correct!')
+            messages.info(request, 'Password is Incorrect!')
             return redirect('sale:settings')
     return redirect('sale:settings')

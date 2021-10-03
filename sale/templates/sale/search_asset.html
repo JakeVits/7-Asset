@@ -14,27 +14,49 @@
 </div>
 {% if all_asset %}
     <div class="asset-container">
-        {% for i in all_asset %}
-            <div class="box">
+        {% for asset in all_asset %}
+            <div id="asset-box" class="box">
                 <div class="img-background">
-                    <img src="{{i.image.url}}" width="390px" height="200px">
+                    <img src="{{asset.image.url}}" width="390px" height="200px">
                 </div>
                 <div class="attribute">
-                    <h3 id="asset-name">{{i.name}}</h3>
-                    <p class="p-tag">Asset-ID<span class="asset-info">{{i.id}}</span></p><hr>
-                    <p class="p-tag" id="owner">Owner<span class="asset-info">{{i.owner}}</span></p><hr>
-                    <p class="p-tag">Price<span class="asset-info">{{i.price}}$</span></p><hr>
-                    <p class="p-tag">Address<span class="asset-info">{{i.address}}</span></p><hr>
-                    <p class="p-tag">Phone-Number<span class="asset-info">{{i.phone_number}}</span></p><hr>
-                    <p class="p-tag">Release-Date<span class="asset-info">{{i.created_at}}</span></p><hr>
-                    <p class="interest" onclick="getInterest(this.id);">*** Interested-In ***</p><hr>
-                    <p id="desc-info"><p>{{i.description}}</p>
+                    <h3 id="asset-name">{{asset.name}}</h3>
+                    <p class="p-tag">Asset-ID<span class="asset-info">{{asset.id}}</span></p><hr>
+                    <p class="p-tag" id="owner">Owner<span class="asset-info">{{asset.owner}}</span></p><hr>
+                    <p class="p-tag">Price<span class="asset-info">{{asset.price}}$</span></p><hr>
+                    <p class="p-tag">Address<span class="asset-info">{{asset.address}}</span></p><hr>
+                    <p class="p-tag">Phone-Number<span class="asset-info">{{asset.phone_number}}</span></p><hr>
+                    <p class="p-tag">Release-Date<span class="asset-info">{{asset.created_at}}</span></p><hr>
+                    <!--- to submit form when its clicked ---->
+                    <form class="interest-form" id="form{{asset.id}}">
+                        {% csrf_token %}
+                        <input name="interest" type="hidden" value="{{asset.id}}">
+                        <div id="input{{asset.id}}" class="interest-info">
+                            {% if user in asset.interested_user.all %}
+                                <input onclick="getInterest(this.id)" id="{{asset.id}}"
+                                       type="submit" value="*** Interested-In ***" class="interest"/>
+                            {% else %}
+                                <input onclick="getInterest(this.id)" id="{{asset.id}}"
+                                       type="submit" value="*** Interested-In ***" class="not-interest"/>
+                            {% endif %}
+                            {% if asset.total_interest > 0 %}
+                                <p class="total-interest" id="interest{{asset.id}}">
+                                    {{asset.total_interest}} people is interested in this asset
+                                </p>
+                            {% endif %}
+                        </div><hr>
+                    </form>
+                    <p id="desc-info"><p>{{asset.description}}</p>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% else %}
-    <h1 id="no-asset" >No Matches Result : (</h1>
+    <h1 id="empty-asset" >No Available Asset : (</h1>
 {% endif %}
+<script>
+    window.post_url = "{% url 'sale:interest' %}";
+    window.get_url = "{% url 'sale:search' %}";
+</script>
 <script src="{% static 'sale/js/search_asset.js' %}"></script>
 {% endblock %}

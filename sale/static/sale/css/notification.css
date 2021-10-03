@@ -1,0 +1,42 @@
+
+.main-noty-bar{
+    margin-top: 6%;
+}
+.notification-bar{
+    position: relative;
+    width: 100%;
+    padding: 20px 20px 0px 20px;
+}
+.noty-bar{
+    position: relative;
+    background: #f4e7d7;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 5px;
+    border-radius: 8px;
+}
+#noty-info{
+    font-size: 13px;
+    float: none;
+}
+.noty-title{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+}
+.noty-title h3{
+    font-weight: 700;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
+}
+.noty-title p{
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
+    padding-top: 15px;
+}
+/*
+.bottom{
+    padding-bottom: 47%;
+}*/

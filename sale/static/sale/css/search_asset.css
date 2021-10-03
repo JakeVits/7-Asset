@@ -24,9 +24,9 @@
     top: 3px;
     color: gray;
 }
-#no-asset{
+#empty-asset{
     text-align: center;
-    opacity: 0.4;
+    opacity: 0.3;
     padding-top: 15%;
     padding-bottom: 21%;
     font-family: 'Ubuntu', sans-serif;
@@ -45,7 +45,7 @@ input::placeholder{
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 50px;
     box-sizing: border-box;
-    padding: 7% 7%;
+    padding: 5% 7%;
     letter-spacing: 1px;
     position: relative;
 }
@@ -70,6 +70,7 @@ p{
     padding-top: 2%;
     font-size: 20px;
     padding-bottom: 1%;
+    letter-spacing: 3px;
 }
 .asset-info{
     float: right;
@@ -77,18 +78,37 @@ p{
 .p-tag:hover{
     background-color: #222;
 }
-.interest{
-    text-align: center;
-    color: white;
-}
-.interest:hover{
-    color: yellow;
-    cursor: pointer;
-}
 .asset-desc{
     text-align: center;
 }
 hr{
     height: 1px;
     border-top: 1px;
+}
+/**************** design for interest/not-interest ****************/
+.interest, .not-interest{
+    text-align: center;
+    border: none;
+    background: black;
+    letter-spacing: 1px;
+    font-size: 12px;
+    outline: none;
+}
+.interest{
+    color: yellow;
+}
+.interest:hover{
+    color: yellow;
+    cursor: pointer;
+}
+.not-interest{
+    color: white;
+}
+.not-interest:hover{
+    color: yellow;
+    cursor: pointer;
+}
+.total-interest{
+    font-size: 10px;
+    text-align: center;
 }

@@ -15,7 +15,7 @@
 {% if messages %}
     {% for m in messages %}
         {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-            <div class="wrapper">
+            <div class="wrapper" id="success-message">
                 <div class="toast-success">
                     <i id="success" class="fa fa-check-circle" aria-hidden="true"></i>
                     <div class="message">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="wrapper">
+            <div class="wrapper" id="failure-message">
                 <div class="toast-failure">
                     <i id="failure" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                     <div class="message">
@@ -86,7 +86,7 @@
         </form>
     </div>
 </div>
-<script>window.USER_FOLLOW_URL = "{% url 'sale:new_asset' %}";</script>
+<script>window.get_url = "{% url 'sale:create_asset' %}";</script>
 <script src="{% static 'sale/js/new_asset.js' %}"></script>
 </body>
 </html>

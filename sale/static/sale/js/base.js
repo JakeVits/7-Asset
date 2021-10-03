@@ -1,5 +1,7 @@
 
 let scroll_btn = document.querySelector('#top-btn')
+let user_image = document.querySelector('.user-image')
+let pp_menu = document.querySelector('.pp-menu')
 window.onscroll = () => scrollUp()
 
 //triggers when user scrolls down
@@ -24,3 +26,8 @@ function toggleMenu(){
     navigation.classList.toggle('active');
     main.classList.toggle('active');
 }
+user_image.addEventListener('click', (e)=>{
+    pp_menu.classList.toggle('open-pp-menu')
+})
+
+

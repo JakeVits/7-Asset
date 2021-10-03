@@ -71,13 +71,28 @@ function showFile(){
     fileReader.readAsDataURL(file) //read the added file
     remove_btn.style.display = 'block'
 }
-//************** to remove notification when being clicked *****************
+//************** to remove form notification when it is clicked *****************
 if(notification){
+    setTimeout(refreshNoty, 3000);
     notification.forEach(noty =>{
-        console.log(noty)
         noty.addEventListener('click', () =>{
             noty.style.display = 'none'
         })
     })
 }
 
+// function to refresh form notification every 4 sec
+function refreshNoty(){
+     var get_url = window.get_url; //get the get_url variable from html
+     $.ajax({
+          url: get_url,
+          type: 'get',
+          success: function(data){
+               $('#success-message').load(get_url + ' #success-message')
+               $('#failure-message').load(get_url + ' #failure-message')
+          },
+          complete:function(data){
+               setTimeout(refreshNoty, 3000);
+          }
+     });
+}
