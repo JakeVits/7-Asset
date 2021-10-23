@@ -11,13 +11,13 @@ urlpatterns = [
 
     path('', views.DashboardView.as_view(), name='dashboard'),
     path('add-asset/', views.CreateAssetView.as_view(), name='create_asset'),
+    path('inventory/', views.InventoryView.as_view(), name='inventory'),
+    path('asset-details/<pk>/', views.AssetDetailView.as_view(), name='asset_details'),
     path('delete-asset/<pk>/', views.DeleteAssetView.as_view(), name='delete_asset'),
     path('update-asset/<pk>/', views.UpdateAssetView.as_view(), name='update_asset'),
-    path('my-inventory/', views.InventoryView.as_view(), name='inventory'),
     path('search-asset/', views.SearchAssetView.as_view(), name='search'),
-    path('my-notification/', views.NotificationView.as_view(), name='notification'),
+    path('notification/', views.NotificationView.as_view(), name='notification'),
     path('settings/', views.SettingsView.as_view(), name='settings'),
     path('interest/', views.getInterest, name='interest'),
-    path('profile/', views.ProfileView.as_view(), name='profile'),
-    # path('details/<pk>/', views.UserDetailsView.as_view(), name='details'),
+    path('profile/<pk>/', views.ProfileView.as_view(), name='profile'),
 ]

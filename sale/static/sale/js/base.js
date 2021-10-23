@@ -21,11 +21,12 @@ function scrollBtn(){
 function toggleMenu(){
     let toggle = document.querySelector('.toggle');
     let navigation = document.querySelector('.navigation');
-    let main = document.querySelector('.main');
+    let container = document.querySelector('.base-container');
     toggle.classList.toggle('active');
     navigation.classList.toggle('active');
-    main.classList.toggle('active');
+    container.classList.toggle('active');
 }
+//to open profile menu
 user_image.addEventListener('click', (e)=>{
     pp_menu.classList.toggle('open-pp-menu')
 })

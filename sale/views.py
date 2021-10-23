@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from .models import User, Asset, Profile, Notification
-from .forms import AssetForm
-from django.shortcuts import redirect, render
+from .forms import AssetForm, ProfileForm
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import JsonResponse
 import json
 
@@ -34,17 +34,33 @@ class CreateAssetView(LoginRequiredMixin, generic.CreateView):
         return redirect('sale:create_asset')
 
 
-class DeleteAssetView(LoginRequiredMixin, generic.DeleteView):
+class InventoryView(LoginRequiredMixin, generic.ListView):
     template_name = 'sale/inventory.html'
-    success_url = reverse_lazy('sale:inventory')
-    model = Asset
+    context_object_name = 'asset_list'
 
-    def get(self, *args, pk):
-        if authorizeUser(self.request, pk):
-            asset = Asset.objects.get(id=self.kwargs.get('pk'))
-            asset_list = Asset.objects.filter(owner=self.request.user).order_by('name')
-            return render(self.request, self.template_name, {'asset_delete': asset, 'asset_list': asset_list})
-        return redirect('sale:dashboard')
+    def post(self, *args):
+        asset_id = self.request.POST.getlist('checkbox')  # get checked box value to delete asset
+        if asset_id:
+            for asset_id in asset_id:
+                Asset.objects.get(id=asset_id).delete()
+        else:
+            Asset.objects.filter(owner=self.request.user).delete()
+        return redirect('sale:inventory')
+
+    def get_queryset(self):
+        asset_name = self.request.GET.get('asset_name')
+        if asset_name:
+            return Asset.objects.filter(owner=self.request.user, name__icontains=asset_name).order_by('-created_at')
+        return Asset.objects.filter(owner=self.request.user).order_by('-created_at')
+
+
+class AssetDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'sale/asset_details.html'
+    model = Asset
+    context_object_name = 'asset'
+
+    def get_object(self):
+        return get_object_or_404(Asset, id=self.kwargs.get('pk'))
 
 
 class UpdateAssetView(LoginRequiredMixin, generic.UpdateView):
@@ -52,10 +68,12 @@ class UpdateAssetView(LoginRequiredMixin, generic.UpdateView):
     form_class = AssetForm
     model = Asset
     context_object_name = 'update_asset'
+    ''' function to authorize user '''
 
     def get(self, *args, pk):
         if authorizeUser(self.request, pk):
-            return render(self.request, self.template_name, {'update_asset': Asset.objects.get(id=self.kwargs.get('pk'))})
+            return render(self.request, self.template_name,
+                          {'update_asset': Asset.objects.get(id=self.kwargs.get('pk'))})
         return redirect('sale:dashboard')
 
     def form_valid(self, form):
@@ -70,32 +88,29 @@ class UpdateAssetView(LoginRequiredMixin, generic.UpdateView):
         return redirect('sale:update_asset', pk=self.kwargs.get('pk'))
 
 
-class InventoryView(LoginRequiredMixin, generic.ListView):
+class DeleteAssetView(LoginRequiredMixin, generic.DeleteView):
     template_name = 'sale/inventory.html'
+    success_url = reverse_lazy('sale:inventory')
+    model = Asset
+    ''' function to authorize user '''
 
-    def get_queryset(self):
-        return Asset.objects.filter(owner=self.request.user).order_by('-created_at')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['asset_list'] = self.get_queryset()
-        return context
+    def get(self, *args, pk):
+        if authorizeUser(self.request, pk):
+            asset = Asset.objects.get(id=self.kwargs.get('pk'))
+            asset_list = Asset.objects.filter(owner=self.request.user).order_by('name')
+            return render(self.request, self.template_name, {'asset_delete': asset, 'asset_list': asset_list})
+        return redirect('sale:dashboard')
 
 
 class SearchAssetView(LoginRequiredMixin, generic.ListView):
     template_name = 'sale/search_asset.html'
+    context_object_name = 'all_asset'
 
     def get_queryset(self):
         asset_name = self.request.GET.get('asset_name')
         if asset_name:
             return Asset.objects.filter(name__icontains=asset_name)
         return Asset.objects.all().order_by('-created_at', 'name')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['all_asset'] = self.get_queryset()
-        # context['current_user'] = User.objects.get(username=self.request.user)
-        return context
 
 
 def getInterest(request):
@@ -106,38 +121,62 @@ def getInterest(request):
         user = User.objects.get(username=request.user)
         if user in asset.interested_user.all():
             Notification.objects.filter(asset_id=data, interested_user=user).delete()
-            asset.total_interest -= 1
             asset.interested_user.remove(user)
             asset.save()
             status = 'not_interest'
         else:
             Notification(asset_id=asset, asset_owner=asset.owner, asset_name=asset.name, interested_user=user).save()
-            asset.total_interest += 1
             asset.interested_user.add(user)
             asset.save()
             status = 'interest'
         return JsonResponse({'asset': asset.name, 'interest': status})
-    return redirect('sale')
+    return redirect('sale:search')
 
 
 class NotificationView(LoginRequiredMixin, generic.ListView):
     template_name = 'sale/notification.html'
+    context_object_name = 'all_noty'
+
+    def post(self, *args):
+        noty_id = self.request.POST.getlist('checkbox')  # get checked box to delete noty
+        if noty_id:
+            for noty_id in noty_id:
+                Notification.objects.get(id=noty_id).delete()
+        else:
+            Notification.objects.filter(asset_owner=self.request.user).delete()
+        return redirect('sale:notification')
 
     def get_queryset(self):
+        asset_name = self.request.GET.get('asset_name')
+        if asset_name:
+            return Notification.objects.filter(asset_owner=self.request.user,
+                                               asset_name__icontains=asset_name).order_by('-date')
         return Notification.objects.filter(asset_owner=self.request.user).order_by('-date')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['all_noty'] = self.get_queryset()
-        return context
 
 
 class SettingsView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'sale/settings.html'
 
 
-class ProfileView(LoginRequiredMixin, generic.TemplateView):
+class ProfileView(LoginRequiredMixin, generic.DetailView):
     template_name = 'sale/profile.html'
+    model = Profile
+    context_object_name = 'profile'
+
+    def post(self, *args, pk):
+        user_id = User.objects.get(id=self.request.POST.get('user_id'))
+        image = self.request.FILES.get('image')
+        user = Profile.objects.get(user_id=user_id)
+        if image:
+            user.image = image
+        user.address = self.request.POST.get('address')
+        user.phone_number = self.request.POST.get('phone_number')
+        user.bio = self.request.POST.get('bio')
+        user.save()
+        return redirect(reverse('sale:profile', kwargs={'pk': pk}))
+
+    def get_object(self):
+        return get_object_or_404(Profile, user_id=self.kwargs.get('pk'))
 
 
 def authorizeUser(request, pk):
@@ -148,21 +187,3 @@ def authorizeUser(request, pk):
     if str(request.user) == str(asset_id.owner):
         return True
     return False
-
-# class InterestView(LoginRequiredMixin, generic.CreateView):
-#     template_name = 'sale/search_asset.html'
-#     fields = ['']
-#     success_url = reverse_lazy('sale:search')
-#
-#     def post(self, *args):
-#         status = self.request.get.POST()
-
-
-# def searchAsset(request):
-#     template_name = 'sale/search_asset.html'
-#     if request.method == 'GET':
-#         asset_name = request.GET.get('asset_name')
-#         if asset_name:
-#             asset_list = Asset.objects.filter(name__icontains=asset_name)
-#             return render(request, template_name, {'asset_list': asset_list})
-#         return render(request, template_name)

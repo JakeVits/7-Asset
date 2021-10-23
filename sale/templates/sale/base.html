@@ -10,6 +10,7 @@
     {% block search_stock_title %}{% endblock %}
     {% block notification_title %}{% endblock %}
     {% block profile_title %}{% endblock %}
+    {% block assetDetails_title %}{% endblock %}
 </head>
 {% load static %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'sale:profile' %}">
+                    <a href="{% url 'sale:profile' user.id %}">
                         <span class="icon"><i class="fa fa-user" style="font-size:19px"></i></span>
                         <span class="title">Profile</span>
                     </a>
@@ -82,7 +83,7 @@
                 </li>
             </ul>
         </div>
-        <div class="main">
+        <div class="base-container">
             <div class="topbar">
                 <div class="toggle" onclick="toggleMenu();"></div>
                 <div class="top-right">
@@ -91,7 +92,7 @@
                     </div>
                     <div class="pp-menu" id="pp-menu">
                         <div class="pp-menu-inner">
-                            <a class="pp-link" href="#">
+                            <a class="pp-link" href="{% url 'sale:profile' user.id %}">
                                 <i class="fa fa-user-circle-o" style="font-size: 18px"><span class="pp-menu-title">Profile</span></i>
                             </a>
                             <a class="pp-link" href="{% url 'logout' %}">
@@ -99,7 +100,7 @@
                             </a>
                         </div>
                     </div>
-                    <h3 id="user-login">Logged-In as {{ user.get_username }}</h3>
+                    <h3 id="user-login">Logged-In as {{ user.username }}</h3>
                 </div>
             </div>
             {% block dashboard %}{% endblock %}
@@ -110,6 +111,7 @@
             {% block inventory %}{% endblock %}
             {% block notification %}{% endblock %}
             {% block profile %}{% endblock %}
+            {% block asset_details %}{% endblock %}
             <button id="top-btn" onclick="scrollBtn()"><i class="fa fa-angle-double-up"></i></button>
 <!--            <div id="copyright-bar">-->
 <!--                <div id="bar">-->

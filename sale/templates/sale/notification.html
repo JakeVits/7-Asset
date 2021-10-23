@@ -3,30 +3,70 @@
 {% block notification %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/notification.css'%}"/>
-<div class="main-noty-bar">
+<div class="noty-container">
+    <div class="modal-container" id="modal-container">
+        <div class="modal">
+            <div class="delete-noty-message">
+                <p>Are you sure to delete notifications?</p>
+            </div>
+            <button class="cancelBtn">Cancel</button>
+            <button type="submit" class="deleteBtn">Delete</button>
+        </div>
+    </div>
+    <div id="noty-first-bar" class="notification-bar">
+        <div id="first-inner-bar" class="noty-bar">
+            <h4>Action</h4>
+            <p class="deleteAllBtn">Delete All Notifications</p>
+            <p class="deleteSelectedBtn">Delete Selected Notifications</p>
+        </div>
+        <div id="second-inner-bar" class="noty-bar">
+            <h4>Summary</h4>
+            <p>You have {{all_noty.count}} notification{{all_noty|pluralize}}</p>
+        </div>
+        <div id="third-inner-bar" class="noty-bar">
+            <h4>Search</h4>
+            <div class="search">
+                <form method="get">
+                    <label>
+                        <input name="asset_name" type="text" placeholder="Asset-Name">
+                        <button id="searchBtn" type="submit"><i id="search-icon" class="fa fa-search" style="font-size:17px"></i></button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
     {% if all_noty %}
-        {% for noty in all_noty %}
-            <div class="notification-bar">
-                <div class="noty-bar">
-                    <div class="noty-title">
-                        <div class="user">
-                            <h3>User</h3>
-                            <p>{{noty.interested_user}}</p>
-                        </div>
-                        <div class="date">
-                            <h3>Date</h3>
-                            <p>{{noty.date}}</p>
-                        </div>
-                        <div class="interested-asset">
-                            <h3>Interested-Asset</h3>
-                            <p>{{noty.asset_name}}</p>
+        <div class="bar">
+            <form method="post" class="noty-form">
+                {% csrf_token %}
+                {% for noty in all_noty %}
+                    <div class="notification-bar">
+                        <div class="noty-bar">
+                            <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{noty.id}}">
+                            <table>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Asset-Owner</th>
+                                    <th>Interested-Asset</th>
+                                    <th>Date</th>
+                                </tr>
+                                <tr>
+                                    <td>{{noty.interested_user}}</td>
+                                    <td>{{noty.asset_owner}}</td>
+                                    <td>{{noty.asset_name}}</td>
+                                    <td>{{noty.date}}</td>
+                                </tr>
+                            </table>
+                            <input class="submitBtn" style="visibility:hidden" type="submit">
                         </div>
                     </div>
-                </div>
-            </div>
-        {% endfor %}
+                {% endfor %}
+            </form>
+        </div>
+    {% else %}
+         <h1 id="empty-noty">No Available Notification</h1>
     {% endif %}
 </div>
 <div class="bottom"></div>
-<!--<script src="{% static 'sale/js/dashboard.js' %}"></script>-->
+<script src="{% static 'sale/js/notification.js' %}"></script>
 {% endblock %}

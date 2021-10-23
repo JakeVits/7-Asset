@@ -5,6 +5,67 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/profile.css'%}"/>
-    <p style="text-align:center">Hi...This is Profile Page</p>
+<div class="profile-container">
+    <div class="inner-profile">
+        <div class="profile-image-field">
+            <img src="{{user.profile.image.url}}">
+        </div>
+        <div class="camera">
+            <img src="{% static 'sale/image/camera.png' %}">
+        </div>
+        <h3 id="current-profile-user">{{user.username}}</h3>
+        <div class="profile-info-field">
+            <i class="fa fa-home" aria-hidden="true" id="address-icon"></i>
+            <span class="bio">
+                {% if profile.address is None or profile.address == '' %}
+                    - - -
+                {% else %}
+                    {{profile.address}}
+                {% endif %}
+            </span><hr><br>
+            <i class="fa fa-phone" aria-hidden="true" id="phone-icon"></i>
+            <span class="bio">
+                {% if profile.phone_number is None or profile.phone_number == '' %}
+                    - - -
+                {% else %}
+                    {{profile.phone_number}}
+                {% endif %}
+            </span><hr><br>
+            <i class='fa fa-address-card' id="bio-icon"></i>
+            <span class="bio">
+                {% if profile.bio is None or profile.bio == '' %}
+                    - - -
+                {% else %}
+                    {{profile.bio}}
+                {% endif %}
+            </span><hr>
+        </div>
+    </div>
+</div>
+<div class="modal-container" id="modal-container">
+    <div class="modal">
+        <form id="profile-form" method="post" action="{% url 'sale:profile' user.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-field">
+                <input name="user_id" type="hidden" value="{{user.id}}">
+                <input name="address" type="text" placeholder="Address"
+                       {% if profile.address is not None %}
+                            value="{{profile.address}}"
+                       {% endif %}><br>
+                <input name="phone_number" type="tel" placeholder="Phone-Number"
+                        {% if profile.phone_number is not None %}
+                            value="{{profile.phone_number}}"
+                        {% endif %}><br>
+                <input name="bio" type="text" placeholder="Short-Bio"
+                       {% if profile.bio is not None %}
+                            value="{{profile.bio}}"
+                       {% endif %}>
+                <input name="image" type="file" accept=".jpg, .jpeg, .png">
+            </div>
+            <button type="submit" class="cancelBtn">Cancel</button>
+            <button type="submit" class="saveBtn">Save</button>
+        </form>
+    </div>
+</div>
 <script src="{% static 'sale/js/profile.js' %}"></script>
 {% endblock %}

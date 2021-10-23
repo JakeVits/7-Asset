@@ -7,7 +7,6 @@
 {% if messages %}
     {% for m in messages %}
         {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-<!--                <strong class="message" id="success" style="color: #00b36e;">{{m}}</strong>-->
             <div class="wrapper" id="success-message">
                 <div class="toast-success">
                     <i id="success" class="fa fa-check-circle" aria-hidden="true"></i>
@@ -17,7 +16,6 @@
                 </div>
             </div>
         {% elif m.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-<!--                <strong class="message" id="info" style="color: red;">{{m}}</strong>-->
             <div class="wrapper" id="failure-message">
                 <div class="toast-failure">
                     <i id="failure" class="fa fa-exclamation-triangle" aria-hidden="true"></i>

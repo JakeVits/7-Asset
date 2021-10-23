@@ -1,11 +1,10 @@
 
-
 let selectedBtn = document.querySelector('.deleteSelectedBtn')
 let deleteAllBtn = document.querySelector('.deleteAllBtn')
 let deleteBtn = document.querySelector('.deleteBtn')
 let cancelBtn = document.querySelector('.cancelBtn')
 let modal = document.querySelector('.modal-container')
-let notyForm = document.querySelector('.inventory-form')
+let notyForm = document.querySelector('.noty-form')
 let checkbox = document.querySelectorAll('.checkbox')
 
 //open the modal when delete text is clicked
@@ -32,16 +31,13 @@ deleteBtn.addEventListener('click', (e)=>{
 })
 function checkBox(){
     let isChecked = false
-    checkbox.forEach((box)=>{
-        if(box.checked == true){
+    for(var i=0;i<checkbox.length;i++){
+        if(checkbox[i].checked){
             selectedBtn.classList.add('displayBtn')
-            isChecked = true
+            isChecked = true;break;
         }
-    })
-    if(!isChecked){
+    }
+    if(isChecked==false){
         selectedBtn.classList.remove('displayBtn')
     }
 }
-
-
-

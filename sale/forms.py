@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, User
-from .models import Asset
+from .models import Asset, Profile
 from django import forms
 
 
@@ -12,4 +12,10 @@ class RegistrationForm(UserCreationForm):
 class AssetForm(forms.ModelForm):
     class Meta:
         model = Asset
-        fields = ['owner', 'category', 'name', 'price', 'image', 'address', 'phone_number', 'description']
+        fields = ['owner', 'category', 'name', 'price', 'image', 'description']
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['user_id', 'address', 'phone_number', 'bio', 'image']

@@ -16,7 +16,7 @@ dropArea.addEventListener('click', ()=>{
     })
 })
 //triggers when user remove the image
-remove_btn.addEventListener('click', ()=>{
+remove_btn.addEventListener('click', (e)=>{
     dropArea.innerHTML =
     `
         <div class="icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
@@ -30,23 +30,23 @@ remove_btn.addEventListener('click', ()=>{
 
 //************** if user drag & drop file  *****************
 //if user drag file over drop area
-dropArea.addEventListener('dragover', (e)=>{
-    e.preventDefault()
-    dropArea.classList.add('active')
-    dragText.textContent = 'Release to Upload File'
-})
-//if user leave dragged file from drop area
-dropArea.addEventListener('dragleave', ()=>{
-    dropArea.classList.remove('active')
-    dragText.textContent = 'Drag & Drop to Upload File'
-})
-//if user drop file on drop area
-dropArea.addEventListener('drop', (e)=>{
-    dropArea.classList.remove('active')
-    file = e.dataTransfer.files[0] //getting only the latest file that was uploaded
-    dropFile()
-    showFile()
-})
+//dropArea.addEventListener('dragover', (e)=>{
+//    e.preventDefault()
+//    dropArea.classList.add('active')
+//    dragText.textContent = 'Release to Upload File'
+//})
+////if user leave dragged file from drop area
+//dropArea.addEventListener('dragleave', ()=>{
+//    dropArea.classList.remove('active')
+//    dragText.textContent = 'Drag & Drop to Upload File'
+//})
+////if user drop file on drop area
+//dropArea.addEventListener('drop', (e)=>{
+//    dropArea.classList.remove('active')
+//    file = e.dataTransfer.files[0] //getting only the latest file that was uploaded
+//    dropFile()
+//    showFile()
+//})
 function dropFile(){
     let dt = new DataTransfer()
     dt.items.add(new File([''], `${file.name}`))

@@ -1,0 +1,40 @@
+{% extends "sale/base.html" %}
+{% block assetDetails_title %}<title>Profile</title>{% endblock %}
+{% block asset_details %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/asset_details.css'%}"/>
+<div class="asset-container">
+    <div class="inner-asset">
+        <div class="asset-image-field">
+            <img src="{{asset.image.url}}">
+        </div>
+        <h3 id="asset-name">{{asset.name}}</h3>
+        <div class="asset-info-field">
+            <span class="asset-info">Category</span>
+            <span class="asset">
+                {{asset.category}}
+            </span><hr>
+            <span class="asset-info">Owner</span>
+            <span class="asset">
+                {{asset.owner}}
+            </span><hr>
+            <span class="asset-info">Price</span>
+            <span class="asset">
+                {% if asset.price is None or profile.bio == '' %}
+                    - - -
+                {% else %}
+                    {{asset.price}} $
+                {% endif %}
+            </span><hr>
+            <span class="asset-info">Created At</span>
+            <span class="asset">
+                {{asset.created_at}}
+            </span><hr>
+            <span class="asset-info" id="description">Description</span><hr>
+            <span class="asset-info" id="desc-info">{{asset.description}}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

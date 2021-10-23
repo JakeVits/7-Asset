@@ -1,84 +1,168 @@
 
-.asset-container{
-    font-family: 'Ubuntu', sans-serif;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 50px;
-    box-sizing: border-box;
-    padding: 4% 7%;
-    letter-spacing: 1px;
-    position: relative;
-}
-.asset-container .box{
-    position: relative;
-    background: #000;
-    padding: 0px 0px 15px;
-    text-align: center;
-    overflow: hidden;
-    border-radius: 20px;
-    color: white;
-}
-.control{
-    background: #330026;
-    width: 100%;
-    height: 5%;
+/*************** asset action bar ************************/
+.inventory-container{
     position: absolute;
-    margin-top: -1.7%;
+    top: 100px;
+    width: 100%;
 }
-.box .img-background img{
-    object-fit: cover;
-}
-p{
-    text-align: left;
-    padding: 1% 4%;
-    font-size: 13px;
-}
-a{
-    font-size: 13px;
-    text-decoration: none;
-    color: white;
-}
-.delete{
-    float: left;
-    padding-left: 5px;
-    padding-top: 1.5px;
-    cursor: pointer;
-}
-.delete:hover{
-    color: red;
-}
-.update{
-    float: right;
-    padding-right: 5px;
-    padding-top: 1.5px;
-}
-.update:hover{
-    color: #0080ff;
-}
-#asset-name{
-    padding-top: 8%;
-    font-size: 20px;
-    padding-bottom: 1%;
-}
-.asset-info{
-    float: right;
-}
-#asset-desc{
-    text-align: center;
+#inventory-first-bar{
     padding-top: 5px;
+    width: 100%;
+    display: flex;
 }
-hr{
-    height: 1px;
-    border-top: 1px;
+#first-inner-bar{
+    background: #cceeff;
+    padding: 5px 30px 20px 30px;
+    width: 40%;
 }
-#unavailable{
+#second-inner-bar{
+    background: #cceeff;
+    margin-left: 2%;
+    padding-right: 30px;
+    width: 60%;
+}
+#third-inner-bar{
+    background: #cceeff;
+    margin-left: 2%;
+    padding-right: 30px;
+    width: 50%;
+}
+#first-inner-bar h4,
+#second-inner-bar h4,
+#third-inner-bar h4{
     text-align: center;
-    opacity: 0.2;
-    font-family: 'Ubuntu', sans-serif;
-    padding-top: 12%;
-    padding-bottom: 30%;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
 }
-/************ modal design *****************/
+#first-inner-bar p,
+#second-inner-bar p{
+    padding-top: 8px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+#first-inner-bar p{
+    text-align: left;
+}
+.deleteAllBtn,
+.deleteSelectedBtn{
+    color: orangered;
+    cursor: pointer;
+    font-weight: 700;
+}
+.deleteSelectedBtn{
+    visibility: hidden;
+}
+.displayBtn{
+    visibility: visible;
+}
+/****************** design for search bar ******************************/
+.search{
+    position: relative;
+    width: 80%;
+    margin-left: 12%;
+}
+.search label{
+    position: relative;
+    width: 100%;
+}
+.search label input{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    padding-left: 40px;
+    outline: none;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.search label .fa{
+    position: absolute;
+    left: 15px;
+    top: 3px;
+    color: gray;
+}
+#empty-asset{
+    text-align: center;
+    opacity: 0.3;
+    transform: translateY(170px);
+    font-family: 'Ubuntu', sans-serif;
+}
+input:focus {
+  border-color: green;
+  box-shadow: 0 0 10px #719ECE;
+}
+input::placeholder{
+    letter-spacing: 1px;
+}
+#searchBtn{
+    cursor: pointer;
+    border: none;
+}
+/*************** asset bars ******************************/
+.inventory-bar{
+    position: relative;
+    width: 100%;
+    padding: 10px 20px 0px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+.inner-inventory-bar{
+    position: relative;
+    background: #f4e7d7;
+    padding: 15px 0 0px 30px;
+    border-radius: 8px;
+}
+table{
+    margin-top: -1.5%;
+    width: 100%;
+    height: 60px;
+    padding-left: 7.5%;
+}
+th, td{
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 1px;
+    width: 20%;
+}
+td a{
+    text-decoration: none;
+    color: #000;
+}
+td a:hover{
+    color: #0066cc;
+}
+.checkbox{
+    width: 15px;
+    height: 15px;
+}
+.asset-name{
+    padding-left: 4%;
+}
+.category{
+    padding-left: 17%;
+}
+.owner{
+    padding-left: 17%;
+}
+.date{
+    padding-left: 17%;
+}
+.inventory-title h3{
+    font-weight: 700;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
+}
+.inventory-title p{
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
+    padding-top: 15px;
+}
+.bar{
+    padding-bottom: 2%;
+}
+/************************** design for modal ****************************/
 .modal-container{
     position: fixed;
     top: 0;
@@ -87,12 +171,11 @@ hr{
     width: 100%;
     height: 100vh;
     font-family: sans-serif;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: visible;
-    /*transition: visibility 0s opacity 0.1s;*/
+    visibility: hidden;
     z-index: 9999;
 }
 .active{
@@ -103,53 +186,32 @@ hr{
     background-color: white;
     width: 25%;
     height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
     border-radius: 10px;
 }
-.closeBtn{
-    background-color: #008080;
+.delete-noty-message{
+    padding: 8% 0 0 22%;
+}
+.cancelBtn{
+    background-color: #ff0066;
     border: 0;
     border-radius: 5px;
     color: #fff;
-    padding: 10px 25px;
+    padding: 10px 20px;
     cursor: pointer;
-    transform: translateX(-122%);
-    position: absolute;
-    margin-top: 3%;
+    transform: translate(47px, 45px);
 }
 .deleteBtn{
-    background: crimson;
+    background-color: #008ae6;
     border: 0;
     border-radius: 5px;
     color: #fff;
-    padding: 10px 25px;
+    padding: 10px 22px;
     cursor: pointer;
-    transform: translateX(105%);
-    position: absolute;
-    margin-top: 3%;
-    letter-spacing: 1px;
+    transform: translate(165px, 45px);
 }
 .deleteBtn:hover{
-    background-color: red;
+    background-color: #33adff;
 }
-.closeBtn:hover{
-    background-color: #00b3b3;
-}
-.modal p{
-    padding: 0 30px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    position: relative;
-    margin-top: -22%;
-}
-#confirmation-form{
-    padding-top: 18%;
-}
-.closeBtn,
-.deleteBtn{
-    margin-left: 9.7%;
+.cancelBtn:hover{
+    background-color: #ff4d94;
 }

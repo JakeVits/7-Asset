@@ -1,0 +1,69 @@
+
+/************** design for profile field ********************/
+.asset-container{
+    position: fixed;
+    left: 180px;
+    right: 0;
+    top: 120px;
+    width: 60%;
+    padding: 10px 50px 0px 360px;
+    border-radius: 10px;
+}
+.inner-asset{
+    position: relative;
+    background: linear-gradient(90deg, rgba(63,60,99,1) 36%, rgba(125,69,69,1) 71%);
+    padding: 20px 50px 50px 35px;
+    border-radius: 15px;
+}
+.asset-image-field{
+    position: relative;
+    min-width: 50px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 27%;
+}
+.asset-image-field img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#asset-name{
+    padding-top: 10px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    color: #f2f2f2;
+}
+.asset-info-field{
+    padding: 0px 0 0 12px;
+}
+.asset{
+    float: right;
+    padding-top: 0.5%;
+    color: #f2f2f2;
+    font-size: 13px;
+    letter-spacing: 0.8px;
+}
+.asset-info{
+    color: #f2f2f2;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    font-size: 13px;
+}
+hr{
+    height: 1px;
+    border-top: 1px;
+    margin: 1.5% 0px 12px 0;
+}
+#description{
+    justify-content: center;
+    display: flex;
+    color: #f2f2f2;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+#desc-info{
+    color: #f2f2f2;
+}

@@ -9,8 +9,8 @@ body{
 }
 /********************** home link design *******************************/
 #arrow{
-    margin-left: 3%;
-    position: absolute;
+    margin: 5% 0 0 3%;
+    position: relative;
 }
 #home-link{
     color: white;
@@ -30,12 +30,15 @@ body{
 }
 /********************** form design *******************************/
 .center{
-    margin-top: 5%;
+    margin-top: 0%;
     position: relative;
     left: 24%;
     width: 800px;
     background: #fefefe;
     border-radius: 10px;
+}
+.asset{
+    margin-top: 0%;
 }
 .center .asset h1{
     text-align: center;
@@ -47,9 +50,9 @@ body{
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     position: relative;
-    margin-bottom: 5%;
+    margin-bottom: 0%;
 }
 form .txt_field{
     position: relative;
@@ -64,6 +67,8 @@ form .txt_field{
     outline: none;
     padding-left: 18px;
     letter-spacing: 1px;
+    border-style: solid;
+    border-color: #666;
 }
 .txt_field select{
     width: 54%;
@@ -84,7 +89,7 @@ select, input:focus{
 }
 textarea{
     width: 97%;
-    padding-bottom: 60px;
+    padding-bottom: 90px;
     border-radius: 20px;
     font-family: 'Montserrat', sans-serif;
     padding-left: 15px;
@@ -92,7 +97,6 @@ textarea{
     font-size: 14px;
 }
 textarea::placeholder{
-    padding-top: 2px;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     letter-spacing: 1px;
@@ -131,7 +135,7 @@ input[type="submit"]:hover{
 }
 /****************** Drag & Drop ******************/
 .drag-area{
-    border: 2px dashed #000;
+    border: none;
     height: 155px;
     width: 300px;
     border-radius: 5px;

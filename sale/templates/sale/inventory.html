@@ -2,47 +2,76 @@
 {% block inventory_title %}<title>Inventory</title>{% endblock %}
 {% block inventory %}
 {% load static %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/inventory.css'%}"/>
-<div style="margin-top: 5%;"></div>
-{% if asset_list %}
-    <div class="asset-container">
-        {% for asset in asset_list %}
-            <div class="box">
-                <div class="img-background">
-                    <img src="{{asset.image.url}}" width="390px" height="200px">
-                </div>
-                <div class="control">
-                    <a href="{% url 'sale:delete_asset' asset.id %}" class="delete"><p class="delete">Delete</p></a>
-                    <a href="{% url 'sale:update_asset' asset.id %}" class="update"><p class="update">Update</p></a>
-                </div>
-                <h3 id="asset-name">{{asset.name}}</h3>
-                <p>Asset-ID<span class="asset-info">{{asset.id}}</span></p><hr>
-                <p id="owner">Owner<span class="asset-info">{{asset.owner}}</span></p><hr>
-                <p>Price<span class="asset-info">{{asset.price}}$</span></p><hr>
-                <p>Address<span class="asset-info">{{asset.address}}</span></p><hr>
-                <p>Phone-Number<span class="asset-info">{{asset.phone_number}}</span></p><hr>
-                <p>Release-Date<span class="asset-info">{{asset.created_at}}</span></p><hr>
-                <p id="asset-desc"><strong>Description</strong></p>
-                <p>{{asset.description}}</p>
+<div class="inventory-container">
+    <div class="modal-container" id="modal-container">
+        <div class="modal">
+            <div class="delete-noty-message">
+                <p>Are you sure to delete asset?</p>
             </div>
-            {% if asset_delete %}
-                <div class="modal-container" id="modal_container">
-                    <div class="modal">
-                        <form id="confirmation-form" method="post">
-                            {% csrf_token %}
-                            <p id="delete-info">Are you sure you want to delete this asset?</p>
-                            <a href="{% url 'sale:inventory'%}" class="closeBtn">Cancel</a>
-                            <button type="submit" class="deleteBtn">Delete</button>
-                        </form>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+            <button class="cancelBtn">Cancel</button>
+            <button type="submit" class="deleteBtn">Delete</button>
+        </div>
     </div>
-{% else %}
-    <h1 id="unavailable">No Available Asset For Now</h1>
-{% endif %}
+    <div id="inventory-first-bar" class="inventory-bar">
+        <div id="first-inner-bar" class="inventory-bar">
+            <h4 style="padding-top: 3px;">Action</h4>
+            <p class="deleteAllBtn">Delete All Asset</p>
+            <p class="deleteSelectedBtn">Delete Selected Asset</p>
+        </div>
+        <div id="second-inner-bar" class="inventory-bar">
+            <h4>Summary</h4>
+            <p>You have {{asset_list.count}} asset{{asset_list|pluralize}}</p>
+        </div>
+        <div id="third-inner-bar" class="inventory-bar">
+            <h4>Search</h4>
+            <div class="search">
+                <form method="get">
+                    <label>
+                        <input name="asset_name" type="text" placeholder="Asset-Name">
+                        <button id="searchBtn" type="submit"><i id="search-icon" class="fa fa-search" style="font-size:17px"></i></button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if asset_list %}
+        <div class="bar">
+            <form method="post" class="inventory-form">
+                {% csrf_token %}
+                {% for asset in asset_list %}
+                    <div class="inventory-bar">
+                        <div class="inner-inventory-bar">
+                            <div class="inventory-title">
+                                <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{asset.id}}">
+                                <table>
+                                    <tr>
+                                        <th>Asset-Name</th>
+                                        <th>Category</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{asset.name}}</td>
+                                        <td>{{asset.category}}</td>
+                                        <td>{{asset.created_at}}</td>
+                                        <td>
+                                            <a href="{% url 'sale:asset_details' asset.id %}">View</a> |
+                                            <a href="{% url 'sale:update_asset' asset.id %}">Update</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <input class="submitBtn" style="visibility:hidden" type="submit">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+    {% else %}
+         <h1 id="empty-asset">No Available Asset</h1>
+    {% endif %}
+</div>
+<div class="bottom"></div>
 <script src="{% static 'sale/js/inventory.js' %}"></script>
 {% endblock %}

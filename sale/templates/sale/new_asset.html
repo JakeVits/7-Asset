@@ -43,7 +43,7 @@
 </div>
 <div class="center">
     <div class="asset">
-        <h1>7-Asset</h1>
+        <h1>7-Assets</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="txt_field">
@@ -67,19 +67,11 @@
             </div>
             <div class="drag-area" id="drag-area">
                 <div class="icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
-                <header>Drag & Drop</header>
-                <span>OR</span>
                 <header id="click-here">Click here to upload image file</header>
             </div>
             <input name="image" id="id_image" type="file" accept=".jpg, .jpeg, .png">
             <div class="remove-field">
                 <button id="remove-btn">Remove</button>
-            </div>
-            <div class="txt_field">
-                <input id="address" name="address" type="text" placeholder="Address" required>
-            </div>
-            <div class="txt_field">
-                <input id="phone" name="phone_number" type="tel" placeholder="Contact-Number" required>
             </div>
             <textarea name="description" placeholder="Description & Contact Info" required></textarea>
             <input type="submit" value="Add Asset">

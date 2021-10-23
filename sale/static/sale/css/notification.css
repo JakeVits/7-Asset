@@ -1,28 +1,140 @@
 
-.main-noty-bar{
-    margin-top: 6%;
+/*************** noty action bar ************************/
+.noty-container{
+    position: absolute;
+    top: 100px;
+    width: 100%;
 }
+#noty-first-bar{
+    padding-top: 5px;
+    width: 100%;
+    display: flex;
+}
+#first-inner-bar{
+    background: #cceeff;
+    padding: 15px 30px 20px 30px;
+    width: 40%;
+}
+#second-inner-bar{
+    background: #cceeff;
+    margin-left: 2%;
+    padding-right: 30px;
+    width: 60%;
+}
+#third-inner-bar{
+    background: #cceeff;
+    margin-left: 2%;
+    padding-right: 30px;
+    width: 50%;
+}
+#first-inner-bar h4,
+#second-inner-bar h4,
+#third-inner-bar h4{
+    text-align: center;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+}
+#first-inner-bar p,
+#second-inner-bar p{
+    padding-top: 8px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+#first-inner-bar p{
+    text-align: left;
+}
+.deleteAllBtn,
+.deleteSelectedBtn{
+    color: orangered;
+    cursor: pointer;
+    font-weight: 700;
+}
+.deleteSelectedBtn{
+    visibility: hidden;
+}
+.displayBtn{
+    visibility: visible;
+}
+/****************** design for search bar ******************************/
+.search{
+    position: relative;
+    width: 80%;
+    margin-left: 12%;
+}
+.search label{
+    position: relative;
+    width: 100%;
+}
+.search label input{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    padding-left: 40px;
+    outline: none;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.search label .fa{
+    position: absolute;
+    left: 15px;
+    top: 3px;
+    color: gray;
+}
+input:focus {
+  border-color: green;
+  box-shadow: 0 0 10px #719ECE;
+}
+input::placeholder{
+    letter-spacing: 1px;
+}
+#searchBtn{
+    border: none;
+    cursor: pointer;
+}
+/*************** noty bars ******************************/
 .notification-bar{
     position: relative;
     width: 100%;
-    padding: 20px 20px 0px 20px;
+    padding: 10px 20px 0px 20px;
+    margin-bottom: 10px;
+}
+#notification-bar{
+    margin-top: 3%;
 }
 .noty-bar{
     position: relative;
     background: #f4e7d7;
-    padding-left: 30px;
-    padding-bottom: 30px;
-    padding-top: 5px;
+    padding: 15px 0 0px 30px;
     border-radius: 8px;
 }
-#noty-info{
-    font-size: 13px;
-    float: none;
+table{
+    margin-top: -1.5%;
+    width: 100%;
+    height: 60px;
+    padding-left: 7%;
 }
-.noty-title{
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 10px;
+th, td{
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 1px;
+    width: 20%;
+}
+.checkbox{
+    width: 15px;
+    height: 15px;
+}
+.user{
+    padding-left: 4%;
+}
+.date{
+    padding-left: 17%;
+}
+.interested-asset{
+    padding-left: 17%;
+}
+.owner{
+    padding-left: 18%;
 }
 .noty-title h3{
     font-weight: 700;
@@ -36,7 +148,65 @@
     letter-spacing: 1.5px;
     padding-top: 15px;
 }
-/*
-.bottom{
-    padding-bottom: 47%;
-}*/
+.bar{
+    padding-top: 0.8%;
+}
+/************************** design for modal ****************************/
+.modal-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: sans-serif;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    z-index: 9999;
+}
+.active{
+    visibility: visible;
+    opacity: 1;
+}
+.modal{
+    background-color: white;
+    width: 25%;
+    height: 20%;
+    border-radius: 10px;
+}
+.delete-noty-message{
+    padding: 8% 0 0 16%;
+}
+.cancelBtn{
+    background-color: #ff0066;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transform: translate(47px, 45px);
+}
+.deleteBtn{
+    background-color: #008ae6;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 22px;
+    cursor: pointer;
+    transform: translate(165px, 45px);
+}
+.deleteBtn:hover{
+    background-color: #33adff;
+}
+.cancelBtn:hover{
+    background-color: #ff4d94;
+}
+#empty-noty{
+    text-align: center;
+    opacity: 0.3;
+    transform: translateY(140px);
+    font-family: 'Ubuntu', sans-serif;
+}

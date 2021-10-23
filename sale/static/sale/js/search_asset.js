@@ -7,7 +7,6 @@ function getInterest(id){
         e.preventDefault()
         e.stopImmediatePropagation();
         var post_url = window.post_url; //get the post url of django from html
-        var get_url = window.get_url;
         $.ajax({
             type: 'POST',
             url: post_url,
@@ -24,7 +23,6 @@ function getInterest(id){
                 else{
                     console.log(status.asset + ' asset is not interested')
                 }
-                $(`#input${id}`).load(get_url + ` #input${id}`)
             },
             error: function(error){
                 console.log('Failed to interest this asset!')

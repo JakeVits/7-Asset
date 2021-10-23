@@ -126,7 +126,7 @@ body{
     letter-spacing: 0.9px;
 }
 /*********************** main body ***************************/
-.main{
+.base-container{
     position: absolute;
     width: calc(100% - 300px);
     left: 300px;
@@ -134,12 +134,12 @@ body{
     background: #f5f5f5;
     transition: 0.5s;
 }
-.main.active{
+.base-container.active{
     width: calc(100% - 60px);
     left: 60px;
 }
 /*********************** top-bar ***************************/
-.main .topbar{
+.base-container .topbar{
     width: 100%;
     background: #fff;
     height: 60px;
@@ -205,6 +205,7 @@ body{
     border-width: thin;
     border-color: #ffb499;
     display: none;
+    z-index: 9999;
 }
 .open-pp-menu{
     display: block;
