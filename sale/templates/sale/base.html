@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
     {% block dashboard_title %}{% endblock %}
     {% block inventory_title %}{% endblock %}
     {% block settings_title %}{% endblock %}
-    {% block search_stock_title %}{% endblock %}
+    {% block search_asset_title %}{% endblock %}
     {% block notification_title %}{% endblock %}
     {% block profile_title %}{% endblock %}
     {% block assetDetails_title %}{% endblock %}
+    {% block search_user_title %}{% endblock %}
 </head>
 {% load static %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -46,9 +49,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'sale:search' %}">
+                    <a href="{% url 'sale:search_asset' %}">
                         <span class="icon"><i class="fa fa-search" style="font-size: 18px;" aria-hidden="true"></i></span>
-                        <span class="title">Search Asset</span>
+                        <span class="title">Search-Asset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sale:search_user' %}">
+                        <span class="icon"><i class="fa fa-users" style="font-size: 18px;" aria-hidden="true"></i></span>
+                        <span class="title">Search-User</span>
                     </a>
                 </li>
                 <li>
@@ -107,11 +116,12 @@
             {% block password_change_form %}{% endblock %}
             {% block stock %}{% endblock %}
             {% block settings %}{% endblock %}
-            {% block search_stock %}{% endblock %}
+            {% block search_asset %}{% endblock %}
             {% block inventory %}{% endblock %}
             {% block notification %}{% endblock %}
             {% block profile %}{% endblock %}
             {% block asset_details %}{% endblock %}
+            {% block search_user %}{% endblock %}
             <button id="top-btn" onclick="scrollBtn()"><i class="fa fa-angle-double-up"></i></button>
 <!--            <div id="copyright-bar">-->
 <!--                <div id="bar">-->

@@ -2,8 +2,8 @@
 {% block inventory_title %}<title>Inventory</title>{% endblock %}
 {% block inventory %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{%static 'sale/css/inventory.css'%}"/>
-<div class="inventory-container">
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/container.css'%}"/>
+<div class="main-container">
     <div class="modal-container" id="modal-container">
         <div class="modal">
             <div class="delete-noty-message">
@@ -13,17 +13,17 @@
             <button type="submit" class="deleteBtn">Delete</button>
         </div>
     </div>
-    <div id="inventory-first-bar" class="inventory-bar">
-        <div id="first-inner-bar" class="inventory-bar">
+    <div id="control-container">
+        <div id="first-inner-bar" class="inner-container">
             <h4 style="padding-top: 3px;">Action</h4>
             <p class="deleteAllBtn">Delete All Asset</p>
             <p class="deleteSelectedBtn">Delete Selected Asset</p>
         </div>
-        <div id="second-inner-bar" class="inventory-bar">
+        <div id="second-inner-bar" class="inner-container">
             <h4>Summary</h4>
             <p>You have {{asset_list.count}} asset{{asset_list|pluralize}}</p>
         </div>
-        <div id="third-inner-bar" class="inventory-bar">
+        <div id="third-inner-bar" class="inner-container">
             <h4>Search</h4>
             <div class="search">
                 <form method="get">
@@ -36,42 +36,37 @@
         </div>
     </div>
     {% if asset_list %}
-        <div class="bar">
-            <form method="post" class="inventory-form">
-                {% csrf_token %}
-                {% for asset in asset_list %}
-                    <div class="inventory-bar">
-                        <div class="inner-inventory-bar">
-                            <div class="inventory-title">
-                                <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{asset.id}}">
-                                <table>
-                                    <tr>
-                                        <th>Asset-Name</th>
-                                        <th>Category</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{asset.name}}</td>
-                                        <td>{{asset.category}}</td>
-                                        <td>{{asset.created_at}}</td>
-                                        <td>
-                                            <a href="{% url 'sale:asset_details' asset.id %}">View</a> |
-                                            <a href="{% url 'sale:update_asset' asset.id %}">Update</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <input class="submitBtn" style="visibility:hidden" type="submit">
-                            </div>
-                        </div>
+        <form method="post" class="container-form">
+            {% csrf_token %}
+            {% for asset in asset_list %}
+                <div class="info-container">
+                    <div class="inner-info-container">
+                        <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{asset.id}}">
+                        <table>
+                            <tr>
+                                <th>Asset-Name</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>{{asset.name}}</td>
+                                <td>{{asset.category}}</td>
+                                <td>{{asset.created_at}}</td>
+                                <td>
+                                    <a href="{% url 'sale:asset_details' asset.id %}">View</a> |
+                                    <a href="{% url 'sale:update_asset' asset.id %}">Update</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="submitBtn" style="visibility:hidden" type="submit">
                     </div>
-                {% endfor %}
-            </form>
-        </div>
+                </div>
+            {% endfor %}
+        </form>
     {% else %}
-         <h1 id="empty-asset">No Available Asset</h1>
+         <h1 id="empty">No Available Asset</h1>
     {% endif %}
 </div>
-<div class="bottom"></div>
-<script src="{% static 'sale/js/inventory.js' %}"></script>
+<script src="{% static 'sale/js/container.js' %}"></script>
 {% endblock %}

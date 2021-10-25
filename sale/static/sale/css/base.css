@@ -127,10 +127,11 @@ body{
 }
 /*********************** main body ***************************/
 .base-container{
-    position: absolute;
+    position: relative;
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
+    overflow: hidden;
     background: #f5f5f5;
     transition: 0.5s;
 }

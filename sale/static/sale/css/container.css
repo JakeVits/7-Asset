@@ -1,48 +1,44 @@
 
-/*************** noty action bar ************************/
-.noty-container{
-    position: absolute;
-    top: 100px;
+/*************** asset action bar ************************/
+.main-container{
+    position: relative;
+    top: 15px;
     width: 100%;
 }
-#noty-first-bar{
-    padding-top: 5px;
+#control-container{
     width: 100%;
     display: flex;
+    position: relative;
+    width: 100%;
+    padding: 10px 20px 5px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transform: translate(0px, 5px);
+}
+.inner-container{
+    background: #cceeff;
+    padding: 5px 30px 15px 30px;
+    width: 50%;
+    margin-left: 2%;
+    letter-spacing: 1px;
+    text-align: center;
+    border-radius: 7px;
+}
+#second-inner-bar,
+#third-inner-bar{
+    padding-top: 7px;
+}
+.inner-container h4{
+    padding-bottom: 2%;
 }
 #first-inner-bar{
-    background: #cceeff;
-    padding: 15px 30px 20px 30px;
-    width: 40%;
+    margin-left: 0%;
 }
-#second-inner-bar{
-    background: #cceeff;
-    margin-left: 2%;
-    padding-right: 30px;
-    width: 60%;
-}
-#third-inner-bar{
-    background: #cceeff;
-    margin-left: 2%;
-    padding-right: 30px;
-    width: 50%;
-}
-#first-inner-bar h4,
-#second-inner-bar h4,
-#third-inner-bar h4{
-    text-align: center;
-    padding-bottom: 10px;
-    letter-spacing: 1px;
-}
-#first-inner-bar p,
-#second-inner-bar p{
+.inner-container p{
     padding-top: 8px;
     font-size: 13px;
     letter-spacing: 1px;
     text-align: center;
-}
-#first-inner-bar p{
-    text-align: left;
 }
 .deleteAllBtn,
 .deleteSelectedBtn{
@@ -81,6 +77,12 @@
     top: 3px;
     color: gray;
 }
+#empty{
+    text-align: center;
+    opacity: 0.3;
+    transform: translateY(170px);
+    font-family: 'Ubuntu', sans-serif;
+}
 input:focus {
   border-color: green;
   box-shadow: 0 0 10px #719ECE;
@@ -89,30 +91,29 @@ input::placeholder{
     letter-spacing: 1px;
 }
 #searchBtn{
-    border: none;
     cursor: pointer;
+    border: none;
 }
-/*************** noty bars ******************************/
-.notification-bar{
+/*************** asset bars ******************************/
+.info-container{
     position: relative;
     width: 100%;
-    padding: 10px 20px 0px 20px;
+    padding: 5px 20px 0px 20px;
+    transform: translate(0px, 10px);
     margin-bottom: 10px;
+    border-radius: 8px;
 }
-#notification-bar{
-    margin-top: 3%;
-}
-.noty-bar{
+.inner-info-container{
     position: relative;
     background: #f4e7d7;
-    padding: 15px 0 0px 30px;
+    padding: 30px 0 0 30px;
     border-radius: 8px;
 }
 table{
     margin-top: -1.5%;
     width: 100%;
     height: 60px;
-    padding-left: 7%;
+    padding-left: 5%;
 }
 th, td{
     text-align: left;
@@ -120,36 +121,33 @@ th, td{
     letter-spacing: 1px;
     width: 20%;
 }
+td a{
+    text-decoration: none;
+    color: #000;
+}
+td a:hover{
+    color: #0066cc;
+}
 .checkbox{
     width: 15px;
     height: 15px;
+    position: absolute;
+    margin-top: -1%;
 }
-.user{
-    padding-left: 4%;
+/************************** user image design *****************************/
+.users-image{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    position: absolute;
+    transform: translate(0px, -40px);
 }
-.date{
-    padding-left: 17%;
-}
-.interested-asset{
-    padding-left: 17%;
-}
-.owner{
-    padding-left: 18%;
-}
-.noty-title h3{
-    font-weight: 700;
-    font-size: 13px;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1.5px;
-}
-.noty-title p{
-    font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1.5px;
-    padding-top: 15px;
-}
-.bar{
-    padding-top: 0.8%;
+.users-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 /************************** design for modal ****************************/
 .modal-container{
@@ -178,7 +176,7 @@ th, td{
     border-radius: 10px;
 }
 .delete-noty-message{
-    padding: 8% 0 0 16%;
+    padding: 8% 0 0 22%;
 }
 .cancelBtn{
     background-color: #ff0066;
@@ -203,10 +201,4 @@ th, td{
 }
 .cancelBtn:hover{
     background-color: #ff4d94;
-}
-#empty-noty{
-    text-align: center;
-    opacity: 0.3;
-    transform: translateY(140px);
-    font-family: 'Ubuntu', sans-serif;
 }

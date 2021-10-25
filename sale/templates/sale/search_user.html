@@ -1,0 +1,63 @@
+{% extends "sale/base.html" %}
+{% block search_user_title %}<title>Inventory</title>{% endblock %}
+{% block search_user %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/container.css'%}"/>
+<div class="main-container">
+    <div id="control-container">
+        <div id="first-inner-bar" class="inner-container">
+            <h4 style="padding-top: 3px;">Action</h4>
+            <p class="deleteAllBtn">Delete All Asset</p>
+            <p class="deleteSelectedBtn">Delete Selected Asset</p>
+        </div>
+        <div id="second-inner-bar" class="inner-container">
+            <h4>Summary</h4>
+            <p>{{all_users.count}} user{{all_users|pluralize}} found</p>
+        </div>
+        <div id="third-inner-bar" class="inner-container">
+            <h4>Search</h4>
+            <div class="search">
+                <form method="get">
+                    <label>
+                        <input name="username" type="text" placeholder="Username">
+                        <button id="searchBtn" type="submit"><i id="search-icon" class="fa fa-search" style="font-size:17px"></i></button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if all_users %}
+        {% csrf_token %}
+        {% for users in all_users %}
+            <div class="info-container">
+                <div class="inner-info-container">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="users-image">
+                                    <img src="{{users.profile.image.url}}">
+                                </div>
+                            </td>
+                            <td>{{users.username}}</td>
+                            <td>{{users.email}}</td>
+                            <td>
+                                <a href="#">View {{users.username}}'s Assets</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="submitBtn" style="visibility:hidden" type="submit">
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+         <h1 id="empty">No Available User</h1>
+    {% endif %}
+</div>
+<script src="{% static 'sale/js/search_user.js' %}"></script>
+{% endblock %}

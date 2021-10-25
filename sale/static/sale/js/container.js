@@ -5,7 +5,7 @@ let deleteAllBtn = document.querySelector('.deleteAllBtn')
 let deleteBtn = document.querySelector('.deleteBtn')
 let cancelBtn = document.querySelector('.cancelBtn')
 let modal = document.querySelector('.modal-container')
-let notyForm = document.querySelector('.inventory-form')
+let form = document.querySelector('.container-form')
 let checkbox = document.querySelectorAll('.checkbox')
 
 //open the modal when delete text is clicked
@@ -28,7 +28,7 @@ cancelBtn.addEventListener('click', (e)=>{
 })
 //submit the form when delete button is clicked
 deleteBtn.addEventListener('click', (e)=>{
-    notyForm.submit()
+    form.submit()
 })
 function checkBox(){
     let isChecked = false

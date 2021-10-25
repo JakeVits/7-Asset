@@ -113,6 +113,17 @@ class SearchAssetView(LoginRequiredMixin, generic.ListView):
         return Asset.objects.all().order_by('-created_at', 'name')
 
 
+class SearchUser(LoginRequiredMixin, generic.ListView):
+    template_name = 'sale/search_user.html'
+    context_object_name = 'all_users'
+
+    def get_queryset(self):
+        username = self.request.GET.get('username')
+        if username:
+            return User.objects.filter(username__icontains=username)
+        return User.objects.all().order_by('username').exclude(username='admin')
+
+
 def getInterest(request):
     if request.method == 'POST' and request.is_ajax():
         status = 'interest'
@@ -130,7 +141,7 @@ def getInterest(request):
             asset.save()
             status = 'interest'
         return JsonResponse({'asset': asset.name, 'interest': status})
-    return redirect('sale:search')
+    return redirect('sale:search_asset')
 
 
 class NotificationView(LoginRequiredMixin, generic.ListView):

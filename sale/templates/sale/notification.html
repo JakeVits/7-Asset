@@ -2,8 +2,8 @@
 {% block notification_title%}<title>Notification</title>{% endblock %}
 {% block notification %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{%static 'sale/css/notification.css'%}"/>
-<div class="noty-container">
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/container.css'%}"/>
+<div class="main-container">
     <div class="modal-container" id="modal-container">
         <div class="modal">
             <div class="delete-noty-message">
@@ -13,17 +13,17 @@
             <button type="submit" class="deleteBtn">Delete</button>
         </div>
     </div>
-    <div id="noty-first-bar" class="notification-bar">
-        <div id="first-inner-bar" class="noty-bar">
+    <div id="control-container">
+        <div id="first-inner-bar" class="inner-container">
             <h4>Action</h4>
             <p class="deleteAllBtn">Delete All Notifications</p>
             <p class="deleteSelectedBtn">Delete Selected Notifications</p>
         </div>
-        <div id="second-inner-bar" class="noty-bar">
+        <div id="second-inner-bar" class="inner-container">
             <h4>Summary</h4>
             <p>You have {{all_noty.count}} notification{{all_noty|pluralize}}</p>
         </div>
-        <div id="third-inner-bar" class="noty-bar">
+        <div id="third-inner-bar" class="inner-container">
             <h4>Search</h4>
             <div class="search">
                 <form method="get">
@@ -36,37 +36,35 @@
         </div>
     </div>
     {% if all_noty %}
-        <div class="bar">
-            <form method="post" class="noty-form">
-                {% csrf_token %}
-                {% for noty in all_noty %}
-                    <div class="notification-bar">
-                        <div class="noty-bar">
-                            <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{noty.id}}">
-                            <table>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Asset-Owner</th>
-                                    <th>Interested-Asset</th>
-                                    <th>Date</th>
-                                </tr>
-                                <tr>
-                                    <td>{{noty.interested_user}}</td>
-                                    <td>{{noty.asset_owner}}</td>
-                                    <td>{{noty.asset_name}}</td>
-                                    <td>{{noty.date}}</td>
-                                </tr>
-                            </table>
-                            <input class="submitBtn" style="visibility:hidden" type="submit">
-                        </div>
+        <form method="post" class="container-form">
+            {% csrf_token %}
+            {% for noty in all_noty %}
+                <div class="info-container">
+                    <div class="inner-info-container">
+                        <input name="checkbox" onclick="checkBox()" type="checkbox" class="checkbox" value="{{noty.id}}">
+                        <table>
+                            <tr>
+                                <th>User</th>
+                                <th>Asset-Owner</th>
+                                <th>Interested-Asset</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td>{{noty.interested_user}}</td>
+                                <td>{{noty.asset_owner}}</td>
+                                <td>{{noty.asset_name}}</td>
+                                <td>{{noty.date}}</td>
+                            </tr>
+                        </table>
+                        <input class="submitBtn" style="visibility:hidden" type="submit">
                     </div>
-                {% endfor %}
-            </form>
-        </div>
+                </div>
+            {% endfor %}
+        </form>
     {% else %}
          <h1 id="empty-noty">No Available Notification</h1>
     {% endif %}
 </div>
 <div class="bottom"></div>
-<script src="{% static 'sale/js/notification.js' %}"></script>
+<script src="{% static 'sale/js/container.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "sale/base.html" %}
-{% block search_stock_title %}<title>Search Asset</title>{% endblock %}
-{% block search_stock %}
+{% block search_asset_title %}<title>Search Asset</title>{% endblock %}
+{% block search_asset %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/search_asset.css'%}"/>
 <div class="search">
@@ -56,7 +56,7 @@
 {% endif %}
 <script>
     window.post_url = "{% url 'sale:interest' %}";
-    window.get_url = "{% url 'sale:search' %}";
+    window.get_url = "{% url 'sale:search_asset' %}";
 </script>
 <script src="{% static 'sale/js/search_asset.js' %}"></script>
 {% endblock %}

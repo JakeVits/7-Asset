@@ -53,6 +53,7 @@ input::placeholder{
     transform: translateY(130px);
     letter-spacing: 1px;
     position: relative;
+    margin-bottom: 10%;
 }
 .asset-container .box{
     position: static;
