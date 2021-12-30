@@ -18,36 +18,38 @@
                 <div class="img-background">
                     <img src="{{asset.image.url}}">
                 </div>
-                <div class="attribute">
-                    <h3 id="asset-name">{{asset.name}}</h3>
-                    <div class="asset-attribute">
-                        <p class="p-tag">Asset-ID<span class="asset-info">{{asset.id}}</span></p><hr>
-                        <p class="p-tag" id="owner">Owner<span class="asset-info">{{asset.owner}}</span></p><hr id="owner-line">
-                        <p class="p-tag">Price<span class="asset-info">{{asset.price}}$</span></p><hr>
-                        <p class="p-tag">Release-Date<span class="asset-info">{{asset.created_at}}</span></p><hr>
-                    </div>
-                    <!--- to submit form when its clicked ---->
-                    <form class="interest-form" id="form{{asset.id}}">
-                        {% csrf_token %}
-                        <input name="interest" type="hidden" value="{{asset.id}}">
-                        <div id="input{{asset.id}}" class="interest-info">
-                            {% if user in asset.interested_user.all %}
-                                <input onclick="getInterest(this.id)" id="{{asset.id}}"
-                                       type="submit" value="*** Interested-In ***" class="interest"/>
-                            {% else %}
-                                <input onclick="getInterest(this.id)" id="{{asset.id}}"
-                                       type="submit" value="*** Interested-In ***" class="not-interest"/>
-                            {% endif %}
+                <h3 id="asset-name">{{asset.name}}</h3>
+                <div class="asset-attribute">
+                    <p class="p-tag" id="owner">Owner<span class="asset-info">{{asset.owner}}</span></p><hr id="line">
+                    <p class="p-tag">Price<span class="asset-info">{{asset.price}}$</span></p><hr>
+                    <p class="p-tag">Release-Date<span class="asset-info">{{asset.created_at|date:"M d, Y"}}</span></p><hr>
+                    <p class="p-tag">Total-Interest
+                        <span class="total-interest" id="interest-asset{{asset.id}}">
                             {% if asset.interested_user.all.count > 0 %}
-                                <p class="total-interest" id="interest{{asset.id}}">
-                                    {{asset.interested_user.all.count}} people is interested in this asset
-                                </p>
+                                {{asset.interested_user.all.count}}
+                            {% else %}
+                                - - -
                             {% endif %}
-                        </div><hr class="line">
-                    </form>
-                    <p id="asset-desc"><strong>Description</strong></p>
-                    <p id="desc-info">{{asset.description}}</p>
+                        </span>
+                    </p><hr>
+                    <p class="p-tag">Details
+                        <span class="asset-info">
+                                <a id="view-details" href="{% url 'sale:asset_details' asset.id %}">View Here</a>
+                        </span>
+                    </p><hr>
                 </div>
+                <!--- to submit form when its clicked ---->
+                <form class="interest-form" id="form{{asset.id}}">
+                    {% csrf_token %}
+                    <input name="interest" type="hidden" value="{{asset.id}}">
+                    <div id="input{{asset.id}}" class="interest-info">
+                        {% if user in asset.interested_user.all %}
+                            <input onclick="getInterest(this.id)" id="{{asset.id}}" type="submit" value="*** Interested-In ***" class="interest"/>
+                        {% else %}
+                            <input onclick="getInterest(this.id)" id="{{asset.id}}" type="submit" value="*** Interested-In ***" class="not-interest"/>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
         {% endfor %}
     </div>

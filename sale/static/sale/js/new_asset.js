@@ -63,7 +63,7 @@ function dropFile(){
 //************** to display image *****************
 function showFile(){
     let fileReader = new FileReader();
-    fileReader.onload = ()=>{
+    fileReader.onload = () =>{
         let fileURL = fileReader.result //passing user file source in fileURL var
         //adding the img tag inside the dropArea container
         dropArea.innerHTML = `<img src="${fileURL}" alt=""></img>`

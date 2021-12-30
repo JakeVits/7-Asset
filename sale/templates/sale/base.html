@@ -13,7 +13,8 @@
     {% block notification_title %}{% endblock %}
     {% block profile_title %}{% endblock %}
     {% block assetDetails_title %}{% endblock %}
-    {% block search_user_title %}{% endblock %}
+    {% block assetOwner_title %}{% endblock %}
+    {% block searchUser_title %}{% endblock %}
 </head>
 {% load static %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -122,7 +123,8 @@
             {% block profile %}{% endblock %}
             {% block asset_details %}{% endblock %}
             {% block search_user %}{% endblock %}
-            <button id="top-btn" onclick="scrollBtn()"><i class="fa fa-angle-double-up"></i></button>
+            {% block asset_owner %}{% endblock %}
+            <button id="scroll-btn" onclick="scrollBtn()"><i class="fa fa-angle-double-up"></i></button>
 <!--            <div id="copyright-bar">-->
 <!--                <div id="bar">-->
 <!--                    <p id="copyright">Copyright © 2021 7-Assets.com. All rights reserved.</p>-->

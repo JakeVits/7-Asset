@@ -28,7 +28,6 @@ class Asset(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     interested_user = models.ManyToManyField(User, related_name='user', null=True, blank=True)
-    # total_interest = models.BigIntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('sale:update_asset', kwargs={'pk': self.id})

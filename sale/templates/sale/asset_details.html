@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/asset_details.css'%}"/>
+<div class="links">
+    <a class="link" href="{% url 'sale:asset_owner' user.id %}">Search Owner</a> |
+    <a class="link" href="{% url 'sale:search_user' %}">Search User</a> |
+    <a class="link" href="{% url 'sale:search_asset' %}">Search Asset</a>
+</div>
 <div class="asset-container">
     <div class="inner-asset">
         <div class="asset-image-field">
@@ -12,6 +17,10 @@
         </div>
         <h3 id="asset-name">{{asset.name}}</h3>
         <div class="asset-info-field">
+            <span class="asset-info">Asset-ID</span>
+            <span class="asset">
+                {{asset.id}}
+            </span><hr>
             <span class="asset-info">Category</span>
             <span class="asset">
                 {{asset.category}}

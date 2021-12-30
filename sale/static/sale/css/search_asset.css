@@ -58,7 +58,7 @@ input::placeholder{
 .asset-container .box{
     position: static;
     background: #000;
-    padding: 0px 0px 20px;
+    padding: 0px 0px 25px;
     text-align: center;
     overflow: hidden;
     border-radius: 20px;
@@ -95,16 +95,15 @@ input::placeholder{
     padding-top: 10px;
 }
 .asset-info{
+    font-size: 13px;
     float: right;
 }
-.p-tag:hover{
-    background-color: #222;
+.asset-info a{
+    text-decoration: none;
+    color: #fff;
 }
-.interest, .not-interest{
-    margin-top: 6px;
-    margin-bottom: 6px;
-    border: none;
-    outline: none;
+.asset-info a:hover{
+    color: yellow;
 }
 hr{
     height: 1px;
@@ -113,8 +112,8 @@ hr{
     border-color: #4da6ff;
     background-color: #4da6ff;
 }
-#owner-line{
-    background: #0073e6;
+#view-details:hover{
+    color: #00ff00;
 }
 /**************** design for interest/not-interest ****************/
 .interest, .not-interest{
@@ -124,15 +123,12 @@ hr{
     letter-spacing: 1px;
     font-size: 12px;
     outline: none;
-}
-.total-interest{
-    padding-bottom: 5px;
+    margin-top: 15px;
 }
 .interest{
     color: yellow;
 }
 .interest:hover{
-    color: yellow;
     cursor: pointer;
 }
 .not-interest{
@@ -143,6 +139,37 @@ hr{
     cursor: pointer;
 }
 .total-interest{
-    font-size: 10px;
-    text-align: center;
+    font-size: 13px;
+    float: right;
+}
+/****************** Responsiveness ********************************/
+@media only screen and (max-width: 580px) {
+    .search{
+        /* width: 100%; */
+        /* min-width: 15.5rem; */   
+        /* margin: 0 auto; */
+        transform: translate(-165%, 0);
+        min-width: 13rem;
+    }
+    .search form {
+        /* margin: 0 0.5rem 0 0.5rem; */
+        /* width: 100%; */
+    }
+}
+@media only screen and (max-width: 400px){
+    .p-tag, .asset-info, .interest, .not-interest{
+        font-size: 10px;
+    }
+    #asset-name{
+        font-size: 14px;
+    }
+    .asset-container{
+        padding-bottom: 45%;
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+    #scroll-btn{
+        background-color: #007399;
+        opacity: 0.8;
+    }
 }

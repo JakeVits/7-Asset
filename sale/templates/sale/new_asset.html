@@ -60,10 +60,13 @@
                 </select>
             </div>
             <div class="txt_field">
-                <input name="name" type="text" placeholder="Asset" required>
+                {% comment %}{{form.name.label}}{% endcomment %}
+                {{form.name}}
+<!--                <input name="name" type="text" placeholder="Asset" required>-->
             </div>
             <div class="txt_field">
-                <input name="price" type="number" placeholder="Price" max="99999999" required>
+                {{form.price}}
+<!--                <input name="price" type="number" placeholder="Price" min="1" max="99999999" required>-->
             </div>
             <div class="drag-area" id="drag-area">
                 <div class="icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>

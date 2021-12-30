@@ -1,4 +1,3 @@
-
 function getInterest(id){
     let form = document.getElementById(`form${id}`)
     let token = form.getElementsByTagName('input')[0].value
@@ -31,14 +30,18 @@ function getInterest(id){
     })
 }
 function refreshData(){
-     var interest = document.querySelectorAll('.interest-info')
+     var total_interest = document.querySelectorAll('.total-interest')
+     var interest_status = document.querySelectorAll('.interest-info')
      var get_url = window.get_url; //get the get url of django from html
      $.ajax({
           url: get_url,
           type: 'get',
           success: function(data){
-               interest.forEach(i =>{
+               total_interest.forEach(i =>{
                     $(`#${i.id}`).load(get_url + ` #${i.id}`)
+               })
+               interest_status.forEach(status =>{
+                    $(`#${status.id}`).load(get_url + ` #${status.id}`)
                })
           },
           complete:function(data){
@@ -49,3 +52,10 @@ function refreshData(){
 $(document).ready(function(){
     setTimeout(refreshData,1000);
 });
+// var myVar;
+// function myFunction() {
+//   myVar = setTimeout(function(){ alert("Hello"); }, 3000);
+// }
+// function myStopFunction() {
+//   clearTimeout(myVar);
+// }

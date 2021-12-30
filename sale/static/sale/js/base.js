@@ -1,5 +1,5 @@
 
-let scroll_btn = document.querySelector('#top-btn')
+let scroll_btn = document.querySelector('#scroll-btn')
 let user_image = document.querySelector('.user-image')
 let pp_menu = document.querySelector('.pp-menu')
 window.onscroll = () => scrollUp()

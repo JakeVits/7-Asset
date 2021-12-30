@@ -1,18 +1,21 @@
 {% extends "sale/base.html" %}
-{% block search_user_title %}<title>Inventory</title>{% endblock %}
+{% block searchUser_title %}<title>Search User</title>{% endblock %}
 {% block search_user %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'sale/css/container.css'%}"/>
 <div class="main-container">
     <div id="control-container">
         <div id="first-inner-bar" class="inner-container">
-            <h4 style="padding-top: 3px;">Action</h4>
-            <p class="deleteAllBtn">Delete All Asset</p>
-            <p class="deleteSelectedBtn">Delete Selected Asset</p>
+            <h4>Action</h4>
+            <p class="">None</p>
         </div>
         <div id="second-inner-bar" class="inner-container">
             <h4>Summary</h4>
-            <p>{{all_users.count}} user{{all_users|pluralize}} found</p>
+            {% if count_users.count > 1 %}
+                <p>{{count_users.count}} user{{count_users|pluralize}} are found</p>
+            {% else %}
+                <p>{{count_users.count}} user{{count_users|pluralize}} is found</p>
+            {% endif %}
         </div>
         <div id="third-inner-bar" class="inner-container">
             <h4>Search</h4>
@@ -28,7 +31,7 @@
     </div>
     {% if all_users %}
         {% csrf_token %}
-        {% for users in all_users %}
+        {% for users, address in all_users %}
             <div class="info-container">
                 <div class="inner-info-container">
                     <table>
@@ -36,7 +39,8 @@
                             <th></th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Action</th>
+                            <th>Address</th>
+                            <th>View</th>
                         </tr>
                         <tr>
                             <td>
@@ -46,8 +50,9 @@
                             </td>
                             <td>{{users.username}}</td>
                             <td>{{users.email}}</td>
+                            <td>{{address.address}}</td>
                             <td>
-                                <a href="#">View {{users.username}}'s Assets</a>
+                                <a href="{% url 'sale:asset_owner' users.id %}">{{users.username}}'s Assets</a>
                             </td>
                         </tr>
                     </table>
@@ -59,5 +64,5 @@
          <h1 id="empty">No Available User</h1>
     {% endif %}
 </div>
-<script src="{% static 'sale/js/search_user.js' %}"></script>
+<!--<script src="{% static 'sale/js/search_user.js' %}"></script>-->
 {% endblock %}

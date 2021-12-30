@@ -15,18 +15,14 @@ class Registration(generic.CreateView):
     success_url = reverse_lazy('sale:dashboard')
     ''' if inputs are validated '''
     def form_valid(self, form):
-        valid = super(Registration, self).form_valid(form)
+        form.save()
         ''' authenticate and login the new user '''
+        print(form.get_user())
         user = authenticate(self.request, username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
-        if user is not None:
-            login(self.request, user)
-            user = self.request.user
-            Profile(user_id=User.objects.get(id=user.id)).save()  # create new instance in Profile Table
-            self.request.session.set_expiry(7200)
-            return valid
-        else:
-            messages.warning(self.request, 'Invalid Authentication!')
-            return super().form_invalid(form)
+        login(self.request, user)
+        user = self.request.user
+        Profile(user_id=User.objects.get(id=user.id)).save()  # create new instance in Profile Table
+        self.request.session.set_expiry(7200)
 
 
 # to handle user login/authentication
@@ -35,16 +31,13 @@ def logInUser(request):
         form = AuthenticationForm(data=request.POST)
         ''' to check if input credentials are valid or not '''
         if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                ''' to restrict admin from accessing the platform '''
-                if User.objects.get(username=request.POST.get('username')).is_superuser:
-                    messages.warning(request, 'Admin account is not permitted to access!')
-                    return redirect('sale:login')
-                login(request, user)
-                request.session.set_expiry(7200)
-                return redirect('sale:dashboard')
-            return redirect('login')
+            ''' to restrict admin from accessing the platform '''
+            if User.objects.get(username=form.cleaned_data['username']).is_superuser:
+                messages.warning(request, 'Admin account is not permitted to access!')
+                return redirect('sale:login')
+            login(request, form.get_user())
+            request.session.set_expiry(7200)
+            return redirect('sale:dashboard')
         else:
             messages.warning(request, 'Username or Password is Incorrect!')
             return redirect('sale:login')

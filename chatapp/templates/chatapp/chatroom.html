@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat-Room</title>
+</head>
+<body>
+    <h1 style="text-align:center;padding-top: 2%;">This is a Chat-Room</h1>
+    <textarea id="chat-log" style="margin-left: 32%;" cols="70" rows="30"></textarea><br><br>
+    <input id="input-btn" style="margin-left: 32%;width: 34.8%;" type="text"><br><br>
+    <input id="submit-btn" style="margin-left: 32%;" type="button" value="Send">
+</body>
+<script>
+    var chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/')
+    chatSocket.onmessage = function(e){
+        var data = JSON.parse(e.data)
+        var message = data['message']
+        document.querySelector('#chat-log').value += (message + '\n')
+    }
+    chatSocket.onclose = function(e){
+        console.error('Chat socket is closed')
+    }
+    document.querySelector('#submit-btn').onclick = function(e){
+        var inputMessage = document.querySelector('#input-btn')
+        var message = inputMessage.value
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }))
+        inputMessage.value = ''
+    }
+</script>
+</html>

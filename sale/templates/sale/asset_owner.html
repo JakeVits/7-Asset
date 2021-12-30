@@ -1,0 +1,66 @@
+{% extends "sale/base.html" %}
+{% block assetOwner_title %}<title>Search Owner</title>{% endblock %}
+{% block asset_owner %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'sale/css/container.css'%}"/>
+<div class="main-container">
+    <div id="control-container">
+        <div id="first-inner-bar" class="inner-container">
+            <h4 style="padding-top: 3px;">Action</h4>
+            <a class="link" href="{% url 'sale:search_user' %}">Search User</a>
+        </div>
+        <div id="second-inner-bar" class="inner-container">
+            <h4>Summary</h4>
+            <p>{{asset_list.count}} asset{{asset_list|pluralize}} found from {{owner.username}}</p>
+        </div>
+        <div id="third-inner-bar" class="inner-container">
+            <h4>Search</h4>
+            <div class="search">
+                <form method="get">
+                    <label>
+                        <input name="asset_name" type="text" placeholder="Asset-Name">
+                        <button id="searchBtn" type="submit"><i id="search-icon" class="fa fa-search" style="font-size:17px"></i></button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if asset_list %}
+        <form method="post" class="container-form">
+            {% csrf_token %}
+            {% for asset in asset_list %}
+                <div class="info-container">
+                    <div class="inner-info-container">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Owner</th>
+                                <th>Asset-Name</th>
+                                <th>Date</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="users-image">
+                                        <img src="{{owner.profile.image.url}}">
+                                    </div>
+                                </td>
+                                <td>{{owner}}</td>
+                                <td>{{asset.name}}</td>
+                                <td>{{asset.created_at}}</td>
+                                <td>
+                                    <a href="{% url 'sale:asset_details' asset.id %}">View Here</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="submitBtn" style="visibility:hidden" type="submit">
+                    </div>
+                </div>
+            {% endfor %}
+        </form>
+    {% else %}
+         <h1 id="empty">No Available Asset</h1>
+    {% endif %}
+</div>
+<!--<script src="{% static 'sale/js/container.js' %}"></script>-->
+{% endblock %}

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_cleanup',
     'sale',
+    # 'channels',
+    # 'chatapp',
 
     'allauth',
     'allauth.account',
@@ -77,6 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sale_project.wsgi.application'
+# ASGI_APPLICATION = 'sale_project.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

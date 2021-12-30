@@ -46,7 +46,7 @@ body{
     background: #D2691E;
 }
 .navigation ul li:nth-child(1){
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .navigation ul li:nth-child(1):hover{
     background: transparent;
@@ -132,7 +132,7 @@ body{
     left: 300px;
     min-height: 100vh;
     overflow: hidden;
-    background: #f5f5f5;
+    background: #e6f7ff;
     transition: 0.5s;
 }
 .base-container.active{
@@ -287,7 +287,7 @@ i:hover{
     padding-left: 15px;
 }
 /*********************** bottom area ***************************/
-#top-btn{
+#scroll-btn{
     position: fixed;
     width: 50px;
     height: 55px;
@@ -303,7 +303,7 @@ i:hover{
     cursor: pointer;
     display: none;
 }
-#top-btn i{
+#scroll-btn i{
     color: white;
     padding: 20% 27%;
 }
@@ -326,4 +326,37 @@ i:hover{
     text-align: center;
     font-size: 12px;
     letter-spacing: 1px;
+}
+
+/******************* responsiveness design ********************************/
+@media(max-width: 580px){
+    .navigation{
+        width: 100%;
+        left: -100%;
+        z-index: 9999;
+    }
+    .navigation.active{
+        left: 0px;
+        width: 100%;
+    }
+    .base-container{
+        width: 100%;
+        left: 0;
+    }
+    .toggle.active{
+        z-index: 9999;
+        position: fixed;
+        right: 0;
+        transform: translate(45%, -10%);
+    }
+    .toggle.active::before{
+        color: white;
+    }
+    .toggle::before{
+        color: #000;
+    }
+    .navigation ul li .icon{
+        transform: translate(-30%, 0);
+        margin-left: 17.5%;
+    }
 }

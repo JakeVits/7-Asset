@@ -1,18 +1,33 @@
 
+.links{
+    transform: translate(1208px, 0px);
+    padding-top: 1%;
+    position: fixed;
+    left: 0;
+}
+.link{
+    font-size: 13px;
+    text-decoration: none;
+    color: dodgerblue;
+    font-weight: 700;
+}
 /************** design for profile field ********************/
 .asset-container{
     position: fixed;
     left: 180px;
     right: 0;
     top: 120px;
+    bottom: 0;
     width: 60%;
     padding: 10px 50px 0px 360px;
     border-radius: 10px;
+    overflow: auto;
+    margin-bottom: 1%;
 }
 .inner-asset{
     position: relative;
     background: linear-gradient(90deg, rgba(63,60,99,1) 36%, rgba(125,69,69,1) 71%);
-    padding: 20px 50px 50px 35px;
+    padding: 20px 50px 30px 35px;
     border-radius: 15px;
 }
 .asset-image-field{
